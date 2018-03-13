@@ -1,0 +1,364 @@
+\chapter{Procesamiento de im\'agenes con derivadas - Detecci\'on de esquinas y bordes}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV}
+
+El \textit{Cap\'itulo} \ref{CapV} est\'a dedicado a introducir algunos conceptos gen\'ericos, acompa\~nados por m\'etodos espec\'ificos,
+para detectar, evidenciar y resaltar puntos de particular importancia en una imagen: puntos de bordes, aristas, contornos.
+
+%
+
+Existe inter\'es y gran practicidad en varios campos de aplicaci\'on, en referencia a la detecci\'on de puntos de bordes, eventualmente la
+conexi\'on entre \'estos que dan lugar a contornos, permitiendo as\'i evidenciar la presencia de objetos delimitados quie podr\'an luego 
+ser oportunamente caracterizados.
+
+\section{Detecci\'on de bordes utilizando derivadas}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_1}
+
+Es posible introducir conceptos an\'alogos a la derivaci\'on de c\'alculo continuo de orden 1, 2, etc. a fin de realizar procesamientos
+espec\'ificos sobre im\'agenes de inter\'es.
+
+Para regiones con valores de \textit{pixel} constantes, se anular\'a la derivada primera, de modo que puede establecerse precisamente este
+criterio para asociar propiedades de la regi\'on con la derivada. 
+
+Por otro lado, si existe cambio en los valores de \textit{pixel}, se generar\'a una variaci\'on en la derivada, permitiendo nuevamente 
+establecer una asociaci\'on entre las propiedades de la regi\'on (entorno al punto de inter\'es) y su derivada.
+
+As\'i mismo, se aplica el concepto de derivada segunda, cuyo signo indicar\'a la direcci\'on (positiva o negativa, seg\'un se defina el 
+sistema de coordenadas) del gradiente del punto de inter\'es.
+
+\section{Gradiente de una imagen}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_2}
+
+
+El operador gradiente $\vec{\nabla}$ aplicado a la imagen $f(m, n)$ se define por medio de:
+
+\begin{eqnarray}
+	\vec{\nabla}\left[ f(m, m) \right] \equiv \left[ \begin{array}{c}  \nabla_{m} \left[ f(m, n) \right]  
+        \\  \nabla_{n} \left[ f(m, n) \right] \\  \end{array} \right]
+	= \left[ \begin{array}{c}  \frac{f(m + \Delta m, n) - f(m - \Delta m, n)}{2 \Delta m} \\ \\  
+	 \frac{f(m, n + \Delta n) - f(m, n - \Delta n)}{2 \Delta n} \\  \end{array} \right]
+\label{EqLXXIII}
+\end{eqnarray}
+
+
+De modo que la expresi\'on vectorial del gradiente $\vec{\nabla}$ resulta:
+
+\begin{eqnarray}
+	\lvert \vec{\nabla}\left[ f(m, m) \right] \rvert = \sqrt{\nabla_{m}^2 + \nabla_{n}^2} \\ \nonumber
+	\theta(m, n) = \arctan \left( \frac{\nabla_{m}}{\nabla_{n}} \right)
+\label{EqLXXIV}
+\end{eqnarray}
+
+N\'otese que, para prop\'ositos de aplicaci\'on dado que se implementar\'an m\'etodos basados en umbralamiento -y por tanto, solo tienen 
+relevancia las diferencias relativas- conviene introducir una aproximaci\'on para el m\'odulo del gradiente dada por:
+
+\begin{eqnarray}
+	\lvert \vec{\nabla}\left[ f(m, m) \right] \rvert \approx \lvert \vec{\nabla_{m}} \left[ f(m, n) \right]
+ \rvert +  \lvert \vec{\nabla_{n}} \left[ f(m, n) \right] \rvert
+\label{EqLXXV}
+\end{eqnarray}
+
+ 
+\subsection{Detecci\'on de bordes: El operador de Sobel}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_3}
+
+Utilizando la expresi\'on \ref{EqLXXIII} es posible practicar una convoluci\'on de la imagen original $f(m, n)$ utilizando una m\'ascara 
+$\mathbf{M}$ de $3 \times 3$ siguiendo la definici\'on:
+
+
+\begin{eqnarray}
+	\mathbf{M} \equiv \left[ \begin{array}{ccc}  M_{1, 1} & M_{1, 2} & M_{1, 3}  \\  M_{2, 1} & M_{2, 2} & M_{2, 3} \\ 
+	M_{3, 1} & M_{3, 2} & M_{3, 3} \end{array} \right]
+\label{EqLXXVI}
+\end{eqnarray}
+
+En particular, para el operador de Sobel $M_{Sobel}$ es habitual utilizar las expresiones:
+
+\begin{eqnarray}
+	\mathbf{M_{Sobel}} = \begin{array}{c} \left[ \begin{array}{ccc}  -1 & 0 & 1  \\  -2 & 0 & 2 \\ -1 & 0 & 1 \end{array} \right] 
+	%\, \, \; \leftrightarrow \nabla_{m}
+	\\ %\nonumber \\ \nonumber 
+	\left[ \begin{array}{ccc}  -1 & -2 & -1  \\  0 & 0 & 0 \\ 1 & 2 & 1 \end{array} \right] \end{array}
+\label{EqLXXVII}
+\end{eqnarray}
+
+donde el primer arreglo se utiliza para obtener $\mathbf{\nabla_{m}}$ y el segundo $\mathbf{\nabla_{n}}$. \\
+
+Si el bloque de la imagen original $f(m, n)$, para la dimensi\'on de la 
+m\'ascara (3 $\times$ 3) es $B(k, l)$ con 
+$k \in [m - \Delta m, m + \Delta m]$ y $k \in [n - \Delta n, n + \Delta n]$
+
+\begin{eqnarray}
+	\mathbf{\nabla_{m}} = \left( B_{1, 3} + 2 B_{2, 3} + B_{3, 3} \right) -  
+\left( B_{1, 1} + 2 B_{2, 1} + B_{3, 1} \right) 
+	\\ \nonumber
+	\mathbf{\nabla_{n}} = \left( B_{3, 1} + 2 B_{3, 2} + B_{3, 3} \right)
+ -  \left( B_{1, 1} + 2 B_{1, 2} + B_{1, 3} \right) 
+\label{EqLXXVIII}
+\end{eqnarray}
+
+
+
+La aplicaci\'on de la t\'ecnica de detecci\'on y resaltado de bordes, esquinas y contornos por medio del m\'etodo de sobel consiste en 
+realizar la convoluci\'on utilizando la expresi\'on \ref{EqLXXVIII}, y luego al resultado aplicar un criterio de umbralamiento por 
+medio de un par\'ametro $P_{Sobel}$ de modo que:
+
+\begin{eqnarray}
+	\mathbf{M_{Sobel}} \otimes f(m, n) = \left\{ \begin{array}{ll} 
+	1 & \mbox{$\lvert \vec{\nabla} \left[ f(m, n) \right] \rvert > P_{Sobel}$}\\
+	0 & \mbox{$\lvert \vec{\nabla} \left[ f(m, n) \right] \rvert \le P_{Sobel}$}.\end{array} \right.
+\label{EqLXXIX}
+\end{eqnarray}
+
+
+\subsection{Detecci\'on de bordes: El operador de Prewitt}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_3}
+
+Este operador tambi\'en est\'a definido a partir de la aplicaci\'on de derivadas primeras. De hecho, conceptualmente es similar al operador 
+de Sobel, excepto por los valores espec\'ificos de los elementos de matriz de la m\'ascara de convoluci\'on $M_{Prewitt}$, dada por:
+
+
+\begin{eqnarray}
+	\mathbf{M_{Prewitt}} = \begin{array}{c} \left[ \begin{array}{ccc}  -1 & 0 & 1  \\  -1 & 0 & 1 \\ -1 & 0 & 1 \end{array} \right] 
+	\\ \nonumber \\ \nonumber 
+	\left[ \begin{array}{ccc}  1 & 1 & 1  \\  0 & 0 & 0 \\ -1 & -1 & -1 \end{array} \right] \end{array}
+\label{EqLXXX}
+\end{eqnarray}
+
+donde el primer arreglo se utiliza para obtener $\mathbf{\nabla_{m}}$ y el segundo $\mathbf{\nabla_{n}}$.
+
+
+\subsection{Detecci\'on de bordes: El operador de Roberts}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_4}
+
+La particularidad de este operador es que, diferenci\'andose de los operadores de Sobel y Prewitt, posee la capacidad de evidenciar puntos de
+borde pero no as\'i la orientaci\'on de \'estos.
+
+El operador de Roberts se implementa utilizando las diagonales correspondientes al \textit{pixel} de inter\'es, a izquierda $D_{Iz}$ y 
+a derecha $D_{De}$, definidas seg\'un:
+
+\begin{eqnarray}
+	D_{Iz} \equiv f(m, n) - f(m-1, n-1) \\ \nonumber 
+	D_{De} \equiv f(m, n) - f(m-1, n+1)  
+\label{EqLXXXI}
+\end{eqnarray}
+
+De modo que el operador de Roberts $M_{Roberts}$ consiste en determinar para cada \textit{pixel} la cantidad:
+
+\begin{eqnarray}
+	M_{Roberts} \equiv \sqrt{D_{Iz}^2 + D_{De}^2} \, \, \, \rightarrow \, \, 
+	M_{Roberts} \approx \lvert D_{Iz} \rvert + \lvert D_{De} \rvert
+\label{EqLXXXII}
+\end{eqnarray}
+
+
+\subsection{Detecci\'on de bordes: Operador de Kirsch}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_5}
+
+El m\'etodo de Kirsch consiste en introducir m\'ascaras $M_{Kirsch}$ que representan 8 rotaciones en las direcciones principales, es decir
+4 direcciones en filas y columnas (rotaciones de $0$, $\frac{\pi}{2}$, $\pi$ y $\frac{3 \pi}{2}$), y otras 4 rotaciones respecto de las 
+diagonales principales (rotaciones de $\frac{\pi}{4}$, $\frac{3 \pi}{4}$, $\frac{5 \pi}{4}$ y $\frac{7 \pi}{4}$).
+
+Las m\'ascaras de Kirsch se definen como sigue:
+
+\footnotesize
+
+\begin{eqnarray}
+	\mathbf{M_{Kirsch}} \equiv \left\{ 
+	\begin{array}{cccc} 
+	\left[ \begin{array}{ccc}  -3 & -3 & 5  \\  -3 & 0 & 5 \\ -3 & -3 & 5 \end{array} \right] &
+	\left[ \begin{array}{ccc}  -3 & 5 & 5  \\  -3 & 0 & 5 \\ -3 & -3 & -3 \end{array} \right] &
+	\left[ \begin{array}{ccc}  5 & 5 & 5  \\  -3 & 0 & -3 \\ -3 & -3 & -3 \end{array} \right] &
+	\left[ \begin{array}{ccc}  5 & 5 & -3  \\  5 & 0 & -3 \\ -3 & -3 & -3 \end{array} \right]
+	\\ 0 & \frac{\pi}{4} & \frac{\pi}{2} & \frac{3 \pi}{4}
+	\\ \nonumber
+	 \left[ \begin{array}{ccc}  5 & -3 & -3  \\  5 & 0 & -3 \\ 5 & -3 & -3 \end{array} \right] &
+	 \left[ \begin{array}{ccc}  -3 & -3 & -3  \\  5 & 0 & -3 \\ 5 & 5 & -3 \end{array} \right] &
+	 \left[ \begin{array}{ccc}  -3 & -3 & -3  \\  -3 & 0 & -3 \\ 5 & 5 & 5 \end{array} \right] &
+	 \left[ \begin{array}{ccc}  -3 & -3 & -3  \\  -3 & 0 & 5 \\ -3 & 5 & 5 \end{array} \right]
+	\\ \pi & \frac{5 \pi}{4} & \frac{3 \pi}{2} & \frac{7 \pi}{4}
+	\end{array} \right. 
+\label{EqLXXXIII}
+\end{eqnarray}
+
+\normalsize 
+
+
+\subsection{Detecci\'on de bordes: Operadores de Robinson y Frei-Chen}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_6}
+
+El \textit{set} de m\'ascaras de Robinson es similar al de Kirsch, con la diferencia en los valores de m\'ascara para cada uno 
+de los \'angulos.
+%
+En particular, para \'angulo 0$^{o}$, el operador de m\'ascara de Robinson es:
+
+\begin{eqnarray}
+	\mathbf{R_{0}} = \left[ \begin{array}{ccc}  -1 & 0 & 1  \\  -2 & 0 & 2 \\ -1 & 0 & 1 \end{array} \right]
+\label{EqAAA}
+\end{eqnarray}
+
+El \textit{set} de m\'ascaras de Frei-Chen constituye una autobase, por lo que las 9 componentes del \textit{set} permiten expandir, con 
+los pesos correspondientes, cualquier matriz 3 $\times$ 3.
+%
+Por lo tanto, las m\'ascaras de Fri-Chen, representan una generalizaci\'on de los m\'etodos de \textit{image mask}.
+%
+Las expresiones de las m\'ascaras de Fri-Chen ($\mathbf{FC_{k}} \; \; k \in [1, 9] $) son:
+
+
+\begin{eqnarray}
+	\mathbf{ FC_{1} \; \; FC_{2} \; \; FC_{3} }  =  \nonumber \\ 
+	\frac{1}{2 \sqrt{2}} \left\{ 
+	\begin{array}{cccc} 
+	\left[  \begin{array}{ccc}  1 & \sqrt{2} & 1  \\  0 & 0 & 0 \\ -1 & -\sqrt{2} & -1 \end{array} \right] &
+	\left[ \begin{array}{ccc}  1 & 0 & -1  \\  \sqrt{2} & 0 & -\sqrt{2} \\ 1 & 0 & -1 \end{array} \right] &
+	\left[ \begin{array}{ccc}  -1 & 0 & 1  \\  0 & 0 & 0 \\ 1 & 0 & -1 \end{array} \right] &
+	\end{array} \right\} \nonumber
+\label{EqAAB}
+\end{eqnarray}
+
+\begin{eqnarray}
+	\mathbf{ FC_{4} \; \; FC_{5} \; \; FC_{6} }  =  \nonumber \\ 
+	\frac{1}{2 \sqrt{2}} \left\{ 
+	\begin{array}{cccc} 
+	\left[  \begin{array}{ccc}  \sqrt{2} & -1 & 0  \\  -1 & 0 & 1 \\ 0 & 1 & -\sqrt{2} \end{array} \right] &
+	\left[ \begin{array}{ccc}  0 & 1 & 0  \\  -1 & 0 & -1 \\ 0 & 1 & 0 \end{array} \right] &
+	\left[ \begin{array}{ccc}  0 & -1 & \sqrt{2}  \\  1 & 0 & -1 \\ -\sqrt{2} & 1 & 0 \end{array} \right] &
+	\end{array} \right\} \nonumber
+\label{EqAAC}
+\end{eqnarray}
+
+\begin{eqnarray}
+	\mathbf{ FC_{7} \; \; FC_{8} }  =  \nonumber \\ 
+	\frac{1}{6} \left\{ 
+	\begin{array}{cccc} 
+	\left[  \begin{array}{ccc}  1 & -2 & 1  \\  -2 & 4 & 2 \\ 1 & -2 & 1 \end{array} \right] &
+	\left[ \begin{array}{ccc}  -2 & 1 & -2  \\  1 & 4 & 1 \\ -2 & 1 & -2 \end{array} \right] &
+	\end{array} \right\} \nonumber
+\label{EqAAD}
+\end{eqnarray}
+
+\begin{eqnarray}
+	\mathbf{ FC_{9} }  =  \nonumber \\ 
+	\frac{1}{3} \left\{ 
+	\begin{array}{cccc} 
+	\left[  \begin{array}{ccc}  1 & 1 & 1  \\  1 & 1 & 1 \\ 1 & 1 & 1 \end{array} \right] &
+	\end{array} \right\}
+\label{EqAAE}
+\end{eqnarray}
+
+El modo de aplicar la $M$ a la Imagen $I$, que provee el resultado $R$, se obtiene operando del siguiente modo:
+
+\begin{eqnarray}
+	R = \sum _{j=1} ^{9} M_{j} \, I_{j} = \lvert M \rvert \; \lvert I \rvert \; \cos(\theta) = V_{M}^{T} \; V_{I} 
+\label{EqAAF}
+\end{eqnarray}
+
+donde $^{T}$ indica la transpuesta y los vectores $V_{M}$ y $V_{I}$ (de dimensi\'on 1 $\times$ 9) se corresponden con el reordenamiento de 
+la matriz en manera vectorial.
+%
+
+El \textit{set} de m\'ascaras de Frei-Chen pueden utilizarse para la detecci\'on de bordes, identificando que, en virtud de constituir 
+una autobase, un subespacio arbitrario se asocia con ``proyecciones'' de la imagen (o bloque) en el subespacio de inter\'es.
+
+
+
+\section{Extensi\'on de los operadores}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_7}
+
+
+Puede verse que uno de los problemas usuales en los m\'etodos de detecci\'on de bordes, como en general en cualquier t\'ecnica de 
+procesamiento, es que la presencia de se\~nal esp\'urea como ruido, perjudica y limita significativamente la capacidad y 
+\textit{performance} de los m\'etodos de procesamiento.
+%
+
+Un intento para reducir los efectos limitantes de la presencia de ruido se basa en el concepto de ``extensi\'on de operadores'', que 
+consiste en implementar un procedimiento previo a aplicar operadores de detecci\'on de bordes con el objeto conseguir una reducci\'on 
+del ruido en la se\~nal.
+%
+Pero, en lugar de realizar procesos t\;ipicos de filtrado de ruido, como alguno de los descritos en el Cap\'itulo \ref{CapII}, se propone
+una ``expansi\'on'' de los operadores de detecci\'on de bordes, que consiste b\'asicamente en aumentar la dimensi\'on de la m\'ascara 
+correspondiente sin alterar las propiedades de simetr\'ia y operaci\'on de dicha m\'ascara.
+%
+
+A modo de ejemplo, la extensi\'on o expansi\'on del operador de Sobel ser\'ia:
+
+\begin{eqnarray}
+	%\begin{array}{ccccccc} 
+	\left[  \begin{array}{ccccccc}  -1 & -1 & -1  & -2 & -1 & -1 & -1\\  -1 & -1 & -1  & -2 & -1 & -1 & -1 \\ 
+	-1 & -1 & -1  & -2 & -1 & -1 & -1 \\ 0 & 0 & 0  & 0 & 0 & 0 & 0 \\ 1 & 1 & 1  & 2 & 1 & 1 & 1 \\
+	1 & 1 & 1  & 2 & 1 & 1 & 1 \\ 1 & 1 & 1  & 2 & 1 & 1 & 1 
+	\end{array} \right] %&
+	%\end{array} 	\right\}
+\label{EqAAG}
+\end{eqnarray}
+
+
+El c\'alculo del gradiente por fila $G_{X}$ o por columna $G_{y}$ se obtienen por correspondencia de rotaciones $\frac{\pi}{2}$ del 
+operador, en el ejemplo el de Sobel.
+%
+
+La extensi\'on de los operadores, originalmente de 3 $\times$ 3 puede realizarse hacia cualquiera dimensi\'on, aunque t\'ipicamente se
+realiza para 11 $\times$ 11, 9 $\times$ 9 y 7 $\times$ 7.
+
+\section{El m\'etodo de Canny: Algoritmo}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapV_8}
+
+El operador de detecci\'on de bordes de Canny desarrollado durante los '80 se basa en un algoritmo de m\'ultiples fases capaz de detectar 
+bordes de diferentes caracter\'isticas. 
+%
+Representa,de hecho, el operador m\'as utilizado en la detecci\'on de bordes.
+%
+
+El objetivo ideal del m\'etodo propuesto por Canny consist\'ia en hallar un algoritmo \'optimo para detectar bordes.\footnote{V\'ease, por 
+ejemplo \textit{Mammography image detection processing for automatic micro-calcification recognition} Quintana et al. y 
+\textit{Mammography image quality optimisation: a Monte Carlo study} Tirao et al. donde se encuentran ejemplos del c\'alculo y uso de 
+operadores de Canny por medio de gradientes por fila y columna.} 
+%
+El concepto b\'asico es que un buen mecanismo de detecci\'on \'optimo es aquel algoritmo capaz de marcar tantos bordes reales como sea 
+posible, una buena localizaci\'on, y los bordes marcados deben estar lo m\'as cerca posible del borde en la imagen real. 
+%
+Adem\'as, procurar que un borde dado debe ser marcado s\'olo una vez y donde sea posible el ruido presente en la imagen no deber\'ia crear 
+falsos bordes.
+%
+
+La implementaci\'on del m\'etodo de Canny permite optimizar la detecci\'on de bordes diferenciales y consta de tres etapas principales: 
+filtrado, decisi\'on inicial, e hist\'eresis.
+%
+
+La primera etapa consiste en un filtrado de convoluci\'on de la derivada primera de una funci\'on Gaussiana normalizada discreta sobre la 
+imagen, realizada en dos direcciones: horizontal y vertical. 
+%
+La funci\'on Gaussiana posee dos par\'ametros fundamentales, valor medio $M$ y desviaci\'on t\'ipica $\sigma$.
+%
+En este caso, el valor medio es nulo, por lo tanto la ecuaci\'on que define el filtro Gaussiano $G(x)$ es:
+
+\begin{eqnarray}
+	G(x) = k \, \: e^\frac{-x^2}{2 \, \sigma^2}
+\label{EqAA}
+\end{eqnarray}
+
+donde el par\'ametro $k$ se determina de manera que el m\'aximo de $G(x)$ sea la unidad en su versi\'on discreta. 
+%
+
+Para la realizaci\'on del filtro utilizado en la primera etapa, se deriva la expresi\'on \ref{EqAA}, obteni\'endose:
+
+\begin{eqnarray}
+	\frac{d \, G(x)}{d \, x} = -\frac{k}{\sigma^2} \, \: x \, \; e^\frac{-x^2}{2 \, \sigma^2}
+\label{EqAB}
+\end{eqnarray}
+
+La versi\'on discreta del filtro se define de modo an\'alogo y se considera que $x$ asume valores en $[-5 \sigma, 5 \sigma]$ con 
+diferencias de 1 pixel entre muestras consecutivas. 
+%
+
+obviamente, por razones de eficiencia de c\'omputo, es preferible derivar directamente la versi\'on discreta de \ref{EqAA}, con el fin de 
+obtener el valor de $k$.

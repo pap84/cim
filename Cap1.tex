@@ -1,0 +1,292 @@
+\chapter[Introducci\'on al transporte de radiaci\'on]
+{Introducci\'on al transporte de radiaci\'on}
+
+
+% \prologue{Caballo que alcanza, pasar quiere.}
+% {Proverbio burrero}
+
+En este primer capítulo se desarrollará un breve resumen dedicado a presentar los fundamentos básicos y el formalismo necesario para contar con un primer acercamiento a las teorías del transporte de radiación. Los modelos que describen los procesos de transporte y colisión de partículas se encuentran fundamentados en las llamadas \emph{teorías del transporte}, entre las cuales el formalismo de Boltzmann es el más aceptado y utilizado para explicar y entender los diferentes fenómenos.
+
+\noindent
+No es objetivo de este texto desarrollar en detalle el formalismo utilizado en la física de partículas especializada, sino solo presentar el modelado matemático necesario para la comprensión de los procesos físicos involucrados en la formación de imágenes radiológicas. Se presenta así, una introducción al transporte de radiación y sus diferentes tipos de interacción con la materia, se introduce la ecuación de transporte de Boltzmann y los modelos de interacción de diferentes tipos de partículas. Finalmente, se expone una aproximación al caso de los fotones, en quienes se focalizara el presente curso.
+
+\section{Transporte de radiación e interacciones}
+
+En términos generales, la ecuación de transporte de Boltzmann es la representación de la distribución estadística de partículas en un entorno fuera del equilibrio. Se aplica al estudiar de varios fenómenos físicos como flujo de calor o carga eléctrica en medios materiales pudiendo determinar cantidades como conductividades térmica y eléctrica.
+
+Como primer paso se hace referencia al transporte de fotones, lo que luego puede generalizarse por medio de desarrollos análogos que incluyan propiedades específicas del tipo de radiación de interés.
+
+La transferencia, absorción y dispersión de energía por parte de la radiación hacia un medio material se determinan por medio de la ecuación de transporte de Boltzmann y modelos específicos de interacción. Existen diferentes expresiones y aproximaciones para la ecuación de transporte de Boltzmann, pudiendo describirse análogamente tanto en forma diferencial como integral.
+
+El objetivo es determinar el flujo total de radiación $\Phi_{T}$ o bien la radiancia $R$ de partículas emitida por una fuente y transportada en un determinado medio material. Bajo ciertas aproximaciones, las cantidades escalares $\Phi_{T}$ y $R$ satisfacen:
+
+\begin{equation}
+ R\left(\vec{r}, \vec{\Omega}\right) = \frac{d^{2}\Phi_{T}}{dA\, d\Omega \cos{\theta}} \approx \frac{\Phi_{T}}{A\, \Omega \cos{\theta}}
+\end{equation}
+
+\noindent
+donde $\vec{r}$ y $\vec{\Omega}$ son los vectores posición y dirección de movimiento de la partícula que atraviesa el área $A$ formando un ángulo $\theta$ con el versor normal a la superficie de $A$.
+
+Desde un punto de vista matemático, la ecuación de transporte de radiación de Boltzmann es expresada como una ecuación difusiva integro-diferencial, cuya formulación clásica para observables caracterizados por función de distribución $\Theta$ dependientes de la posición $\vec{r}$ es:
+
+\begin{equation}
+ \frac{\partial \Theta}{\partial t} \arrowvert_{\textrm{int}} - \frac{\partial \Theta}{\partial t} = \frac{\partial \Theta}{\partial r} \frac{\vec{p}}{m} + \frac{\partial \Theta}{\partial \vec{p}}\cdot \vec{V}
+ \label{eq.int-dif}
+\end{equation}
+
+\noindent
+donde $\vec{p}$ y $m$ son momento y la masa de la partícula, $t$ indica el tiempo, $\vec{V}$ es el campo de fuerzas y el subíndice $\textrm{int}$ hace referencia al modelo especíco de interacción/colisión entre las partículas del sistema.
+
+En este sentido, hay diferentes modos de interacción entre el flujo de partículas y el medio material. A este propósito, es útil introducir la probabilidad de ocurrencia de una cierta interacción $i$, definida físicamente por la sección eficaz $\sigma_{i}$ , referida al i-ésimo mecanismo de interacción. Por tanto, la probabilidad total $\sigma_{T}$ de ocurrencia de una interacción, de cualquier tipo, se obtiene por
+medio de la suma de todas las contribuciones por parte de cada uno de los procesos de inteacción. A nivel macroscópico, la sección eficaz total macroscópica $\Sigma_{T}$ se define mediante:
+
+\begin{equation}
+ \Sigma_{T} \equiv N \sigma_{T}
+\end{equation}
+
+\noindent
+donde $N$ es la densidad de centros dispersores por unidad de volumen, por lo que la unidad de $N$ resulta de la forma $cm^{-3}$.
+
+Los procesos de interacción incluyen absorción y dispersión (o \emph{scattering}), por lo que:
+
+\begin{equation}
+ \Sigma_T = \Sigma_{abs} + \Sigma_{sca}
+\end{equation}
+
+\noindent
+donde $\Sigma_{abs}$ y $\Sigma_{sca}$ representan las componentes de absorción y \emph{scattering} respectivamente.
+
+La distribución de la cantidad de colisiones $n$ a lo largo de la trayectoria recorrida (\emph{path}) así como la distanciamedia entre colisiones sucesivas $\lambda$ se obtienen de:
+
+\begin{equation}
+ \frac{dn}{ds} = -\Sigma n \Rightarrow n(s) = n(0) e^{-\Sigma s} \Rightarrow \lambda \equiv \frac{\int_{0}^{\infty} s e^{-\Sigma s} ds}{\int_{0}^{\infty} e^{-\Sigma s} ds} = \frac{1}{\Sigma_T}
+ \label{dn}
+\end{equation}
+
+La distancia media entre colisiones sucesivas obtenida a partir de esta distribución $\lambda$ es el camino libre medio o \emph{mean free path} (mpf) y queda determinado por medio de la sección eficaz total.
+
+\section{Estado de fase en transporte de radiaci\'on}
+
+Una partícula de momento $p$ con longitud de onda $\hbar/p$ transportada en un medio material de espesor $x$ tal que $x << \hbar/p$ estará completamente determinada (en su espacio de fase) por la posición $\vec{r}$, la dirección de movimiento $\vec{\Omega}$, la energía $E$ y el tiempo $t$.
+
+Sea $N(\vec{r}, \vec{\Omega}, E, t)$ la densidad angular de partículas en estados de fase $[(x, y, z); (\theta, \phi); E;t]$, que representa la densidad de partículas en el volumen $d\vec{r}$ alrededor de $\vec{r}$, viajando en direcciones $d\vec{\Omega}$ entorno a $\vec{\Omega}$ con energía $E$ a tiempo $t$.
+
+El flujo vectorial angular de partículas $\vec{\Psi}$ puede obtenerse a partir de la densidad angular y la velocidad $\vec{v}$ de las partículas:
+
+\begin{equation}
+ \vec{\Psi} = \vec{v}N(\vec{r}, \vec{\Omega}, E, t)
+ \label{eq.flujo.vec}
+\end{equation}
+
+El flujo angular escalar (o simplemente flujo angular) $\Psi$ se obtiene a partir de la expresión \ref{eq.flujo.vec}, y sus unidades son $cm^{-2}\, s^{-1} \, str^{-1}$ .
+
+Integrando el flujo angular $\Psi$ en todas direcciones para valores dados de $E$, $\vec{r}$ y $t$ se obtiene una cantidad proporcional a la tasa de población-ocupación del estado $(\vec{r}, R,t)$, a veces denominado tasa de “reacción” o “creación”. A partir de esto, puede determinarse el flujo escalar (o simplemente flujo) $\Phi_T$ dado por:
+
+\begin{equation}
+ \Phi_T \equiv \int_{4\pi} \Psi d\Omega
+\end{equation}
+
+La tasa de ocurrencia de eventos (por unidad de volumen), en términos de la probabilidad de cada j-ésimo tipo de interacción $\Lambda$ queda determinada por:
+
+\begin{equation}
+ \Lambda \equiv \Sigma_j \Phi_T
+\end{equation}
+
+La fluencia angular se obtiene a partir de la integral en el tiempo del flujo, y representa el número total de partículas por unidad de área por unidad de energía atravesando el punto $\vec{r}$ con dirección $d\Omega$ entorno a $\Omega$.
+
+Así mismo, puede calcularse la fluencia escalar (o fluencia total) $J(\vec{r}, E,t)$ que resulta de integrar la fluencia angular para todas las direcciones posibles:
+
+\begin{equation}
+ J = |J(\vec{r}, E,t)| = \int_{4\pi} \vec{v} N(\vec{r}, \vec{\Omega}, E, t) d\vec{\Omega}\cdot\hat{n}
+\end{equation}
+
+\noindent
+donde $|\vec{J}|$ es la corriente de partículas y $\hat{n}$ representa un versor en dirección arbitraria para el cálculo de la fluencia escalar $J$.
+
+A partir de esto, puede plantearse la ecuación de transporte de radiación de Boltzmann, dada por:
+
+\begin{equation}
+ \frac{1}{\vec{v}}\frac{\partial}{\partial t}\Psi(\vec{r}, \vec{\Omega}, E, t) + \vec{\Omega}\cdot \vec{\nabla}\Psi - S = \int \int_{4\pi} \Psi(\vec{r}, \vec{\Omega'}, E', t) K(\vec{\Omega'}, E' \rightarrow \vec{\Omega}, E) dE' d\vec{\Omega'}
+ \label{ETB}
+\end{equation}
+
+\noindent
+donde $S$ es la fuente de radiación y $K(\vec{\Omega'}, E' \rightarrow \vec{\Omega}, E)$ es el operador del kernel que cambia el estado de fase de las ``coordenadas'' primadas $(\vec{\Omega'}, E')$ a las sin primar $(\vec{\Omega}, E)$ debido a los procesos de \emph{scattering} en la posición $\vec{r}$.
+ 
+
+\section{Bases para el cálculo de observables a partir de la ecuaci\'on de transporte de radiaci\'on}
+
+Para un sistema estacionario \emph{steady state} puede aplicarse el teorema de Liouville\footnote{Aplicado a sistemas conservativos.} en una aproximación clásica\footnote{Válido también para mecánica Hamiltoniana.} para mostrar que un sistema de partículas evoluciona según la mecánica clásica cuya densidad de estados se representa en un espacio de las fases constante $\Re^{3}\wp^{3}$, donde $\Re$ y $\wp$ refieren a los espacios de posición $\vec{r}$ y de momento $\vec{p}$, respectivamente.
+
+En estado de equilibrio térmico la probabilidad de ocurrencia de un estado se determina por medio de la estadística de Fermi-Dirac para la cual la función de distribución del sistema homogéneo depende únicamente de la energía $E$.
+
+La expresión \ref{eq.int-dif} de la ecuación de Boltzmann puede simplificarse para situaciones en que el término de interacciones $\frac{\partial \Theta}{\partial t}|_\textrm{int}$ sea proporcional a la diferencia entre la función de distribución $\Theta$ en presencia de efetos externos $\vec{V}$ y la función de distribución en equilibrio térmico. Esta condición es equivalente a asumir que una vez cesen los efectos externos, el sistema retorna al equilibrio, debido a las interacciones, con velocidad determinada (proporcional expecíficamente) por la desviación inicial respecto de la condición de equilibrio. Como se mencionó, a partir de estas consideraciones puede calcularse cantidades como tiempo de relajación (inclusive pesado por energía de sistema), conductividad térmica/eléctrica y difusividad, entre otros.
+
+
+\subsection{Densidad de fluencia energ\'etica}
+
+Como ejemplo de la aplicación del formalismo para el estudio de observables, se considera el caso de la energía $E$, que es típicamente la cantidad más importante a fines dosimétricos ya que determina la dosis absorbida.
+
+Sea $\bar{E}$ el valor de expectación de la energía $E$, sin considerar la componente de energía en reposo, portada por todos los quanta que constituyen el haz $N_q$. La fluencia energética $\Psi$ se define por:
+
+\begin{equation}
+ \Psi \equiv \frac{d\bar{E}}{dA}
+\end{equation}
+
+Entonces, para un haz monocromático se tiene $\bar{E} = E_{0}N_{q}$ , como se espera. Y, por tanto, $\Psi = E_{0}\Phi$.
+
+Para el estudio de la evolución de sistemas debido a perturbaciones externas, es conveniente considerar el tiempo $t_0$ en ausencia de fluencia energética $\Psi(t_0) = 0$ y el tiempo $t_{max}$ que se corresponde con el máximo de fluencia energética $\Psi(t_{max}) = \Psi_{max}$.
+
+La tasa de fluencia energética $\Upsilon$ puede calcularse para cualquier tiempo $t$ en el intervalo $(t_0 ,t_{max})$, y se calcula a partir de:
+
+\begin{equation}
+ \Upsilon = \frac{d\Psi}{dt} = \frac{d}{dt} \left(\frac{d\bar{E}}{dA}\right) \Longrightarrow \Psi(t_0,t) = \int_{t_{0}}^{t}{\Upsilon(t')dt'}
+\end{equation}
+
+Por tanto, manteniendo constante la tasa de fluencia energética $\Psi(t_0 ,t) = \Upsilon(t - t_0 )$ resulta que la tasa de fluencia energética, también denominada densidad de flujo energético, $\Upsilon$ es proporcional a la densidad de flujo $\Phi$ si el haz es monocromático $\Upsilon = E_0 \Phi$.
+
+De modo que para determinar observables, experimentalmente, por medio de mediciones a tiempo $t$ en la posición $\vec{r}$, en términos de la energía $E$ dirección de movimiento $\Omega$ dado por los ángulos polar y azimutal $(\theta, \phi)$, resulta que la densidad de flujo diferencial es $\Upsilon(E, \theta, \phi)$ y la densidad de flujo se obtiene de:
+
+\begin{equation}
+ \Upsilon = \int_{0}^{\pi}{\int_{0}^{2\pi}{\int_{0}^{E}{\Upsilon(E', \theta', \phi')\sin{\theta'}d\theta'}d\phi'}dE'}
+\end{equation}
+
+En unidades de inversa de área y tiempo, $cm^{-2}$ $s^{-1}$ , típicamente.
+
+\section{Modelos de interacci\'on de part\'iculas con la materia a partir de la ecuaci\'on de transporte de Boltzmann}
+
+Esta sección presenta, de modo extremadamente escueto, los resultados principales para los fenómenos de interacción debido al paso de partículas por un medio material.
+
+Cada uno de los modelos se obtiene de la aplicación de la ecuación de transporte, sujeto a las consideraciones necesarias en cada caso\footnote{Las derivaciones específicas respecto de la ecuación de transporte no se presentan por encontrarse fuera del alcance de este texto.}. En particular, para cada tipo de radiación y material con el que se interactúa, el problema consiste en describir las propiedades de la fuente de radiación (el término $S$ en la expresión \ref{ETB}) e introducir los modelos físicos que determinan el operador  \emph{kernel} $K(\vec{\Omega'}, E' \rightarrow \vec{\Omega}, E)$ a partir de las funciones de distribución de probabilidades asociadas a cada tipo de proceso de interacción posible. Para el caso de radiación primaria, el término $S$ representa completamente la fuente, mientras que para la radiación secundaria, scattering en general, la producción misma de partículas debido a las interacciones de radiación primaria.
+
+Como resultado de las interacciones de partículas cargadas de velocidad $v = \beta c$ se producen péridas energéticas en cada colisión $\Delta E$, y correspondiente pérdida de energía por unidad de camino $\frac{dE}{dy}$ recorrido , donde y es la dirección a lo largo del track.
+
+Una vez se realizan los modelos de interacción, se determinan las funciones de distribución de probabilidades que dan cuenta de las características estadísticas de los procesos físicos, que quedan determinados por las secciones eficaces $\sigma$.
+
+A partir de las expresiones \ref{dn} y \ref{ETB} puede calcularse el número medio de colisiones con pérdida energética entre $E_{loss}$ y $E_{loss} + \Delta E_{loss}$ al recorrer la distancia $\delta y$:
+
+\begin{equation}
+ \frac{dE}{dy} = \rho_{e} \delta y \frac{d\sigma}{dE} dE
+\end{equation}
+
+\noindent
+donde $\rho_{e}$ es la densidad electrónica.
+
+La determinación del operador \emph{kernel} $K(\vec{\Omega'}, E' \rightarrow \vec{\Omega}, E)$ requiere del conocimiento de los mecanismos por los cuales se produce en cambio de energía y las deflexiones angulares.
+
+
+\subsection{P\'erdidas energ\'eticas en interacciones de part\'iculas cargadas}
+
+Cuando las interacciones ocurren con los electrones orbitales de los átomos blanco, se producen en general ionizaciones, excitación atómica o bien excitación colectiva. En medios absorbentes delgados las colisiones que se producen presentan varianzas grandes.
+
+Para partículas cargadas pesadas (de carga $Z_{p}$ y masa molar $M_{p}$ ) interactuando con un material homogéneo constituido por átomos de número atómico $Z_{A}$ y masa molar $M_{A}$ , la pérdida de energía por colisiones pueden obtenerse a partir de la teoría de Bethe-Bloch, que permite determinar el \emph{stopping power} a lo largo del \emph{track} ($\frac{dE}{dy}$):
+
+\begin{equation}
+ \frac{dE}{dy} = 4 r^{2}_{e} \rho m_{e} c^{2} \frac{Z_{A}}{M_{A}} \frac{Z_{p}^{2}}{\beta^{2}} \times 
+		\left[
+		\frac{1}{2} \ln{\left(
+				2 m_{e} c^{2} \beta^{2} W_{max} \gamma^{2}
+				\right)}
+			    - \beta^{2} - \ln{I} - \frac{C}{Z_{A}} - \frac{\delta}{2}
+		\right]
+\end{equation}
+
+\noindent
+donde $r_e$ y $m_e$ son el radio clásico y masa de electrón en reposo, respectivamente.
+
+Los últimos tres términos entre corchetes representan los efectos de potencial medio de ionización $I$, coeficiente de apantallamiento nuclear $C$ y efecto de densidad $\delta$.
+
+\subsection{Efectos angulares por interacciones de part\'iculas cargadas}
+
+Las partículas cargadas sufren deflexiones angulares al atravesar e interactuar con un medio material. Existen desviaciones pequeñas debidas a interacciones de tipo Coulombianas en el \emph{scattering} con el campo nuclear\footnote{Para el caso particular de haces de hadrones, las interacciones fuertes contribuyen también a los efectos de
+dispersión múltiple (\emph{multiple scattering}).}.
+
+El efecto de dispersión angular por efecto Coulombiano es representado por la teoría de Molière, produciendo distribuciones de deflexiones prácticamente Gaussianas $P(\theta)$, de acuerdo con:
+
+\begin{equation}
+ \begin{split}
+  P(\theta) &= \frac{1}{2 \pi {\theta^{*}}^{2}} e^{-\left[\frac{1}{2}\left(\frac{\theta}{\theta^{*}}\right)^{2}\right]} d\Omega \\
+	    &= \frac{1}{\sqrt{2 \pi} \theta^{*}} e^{-\left[\frac{1}{2}\left(\frac{\theta_{plano}}{\theta^{*}}\right)^{2}\right]} d\theta_{plano}
+ \end{split}
+\end{equation}
+
+\noindent
+donde $\theta^{*}$ es la media de la distribución Gaussiana y $\theta_{plano}$ representa la proyección planar del ángulo polar que forma el ángulo sólido $d\Omega$ y se trabaja en la aproximación a bajo ángulo, de modo que $\theta^{2} \approx \theta_{x}^{2} + \theta_{y}^{2}$ , para las proyecciones planares en los ejes $x$ e $y$, siendo $\theta_{x}^{2}$ y $\theta_{y}^{2}$ independientes pero respetando la misma distribución.
+
+\subsection{Determinaci\'on de distancias de interacci\'on}
+
+La distancia atravesada dentro del medio material se denomina \emph{radiation length} $X$, típicamente medida en $g \cdot cm^{-2}$.
+
+A modo de ejemplo, para el caso particular de electrones de enegías altas, la pérdida de energía dominante es por medio de radiación de \emph{Bremsstrahlung} y producción de pares. En este caso, la \emph{radiation length} para estos dos procesos se denomina $X_{0}$ y se calcula a partir de la teoría de Tsai:
+
+\begin{equation}
+ X_{0} = \frac{B}{4 \alpha r_{e}^{2} N_{A}} \frac{1}{Z^{2}[L_{rad} - f(Z)] + Z L'_{rad}}
+\end{equation}
+
+Los parámetros $L_{rad}$ y $L'_{rad}$ son coeficientes que pueden determinarse para cada tipo de átomo. Por otro lado, la función parametrizada $f(Z)$ se obtiene de:
+
+\begin{equation}
+ f(Z) = (\alpha Z)^{2} \left\{
+			\left[1 + (\alpha Z)^{2}]^{-1} + 0.202 - 0.0369 (\alpha Z)^{2} + 0.008 (\alpha Z)^{4} - 0.002 (\alpha Z)^{6} \right]
+		       \right\}
+\end{equation}
+
+Para el caso de moléculas, se utilizan modelos de composición efectiva, y la \emph{radiation length} $X_{0,mol}$ de compuestos formados por componentes con pesos relativos $q_{k}$ , puede calcularse de modo aproximado utilizando:
+
+\begin{equation}
+ \frac{1}{X_{0, mol}} = \sum_{k} \frac{q_{k}}{X_{k}}
+\end{equation}
+
+\section{Aproximaciones para el transporte de fotones en medios materiales}
+
+En el caso particular que se estudiará en el presente curso, el interés está en los procesos físicos involucrados en la interacción de rayos $X$ de radiodiagnóstico, con medios materiales de interés biológico.
+
+Si se consideran las configuraciones típicas, y los procesos más probables en las geomtrías usuales en radiodiagnóstico, resulta que la radiación primaria proviene de la fuente $S$ que en este caso se trata del haz de rayos $X$ utilizado.
+
+Los procesos de interacción suceden dentro del paciente y el haz emergente, determinado por la ecuación de transporte de Boltzmann, formado tanto por radiación primaria (proveniente de la fuente $S$) y radiación de \emph{scattering} generada por interacciones dentro del paciente, llega en definitiva al sistema de detección para formar la imagen radiológica.
+
+Según la energía del haz de la fuente $S$, y las propiedades de absorción/dispersión, así como de las dimensiones físicas del paciente, resultará que la mayor parte del flujo ergente se corresponderá con la componente primaria o de \emph{scattering}.
+
+Incorporando los modelos de interacción radiación-materia que corresponden a fotones con energías de kilovoltaje, típicas de radiodiagnóstico, tejidos biológicos y para dimensiones típicas de pacientes, resulta que en el flujo emergente la componente de radiación primaria es prácticamente todo el flujo, existiendo contribuciones del orden del $2 \%$ por parte del \emph{scattering}. Por tanto, la descripción del transporte de la componente primaria del flujo emergente proporciona una buena aproximación del flujo de radiación que alcanzará el detector para dar lugar a la formación de la imagen.
+
+Para modelar el transporte de radiación primaria, utilizando la ecuación de transporte de Boltzmann en la expresión \ref{ETB}, se introducen algunas aproximaciones a fin de facilitar la resolución del problema aplicable a las condiciones propias del proceso radiológico típico.
+
+La primera condición es considerar el problema en estado estacionario, ya que se admite el equilibrio del flujo incidente/interactuante/emergente. De este modo, se tiene que se anula el primer término de la expresión \ref{ETB}, ya que $\frac{\partial}{\partial t} \Psi = 0$.
+
+Suponiendo que el transporte se realiza, principalmente, en una dirección, denominada $z$, el segundo término en la expresión \ref{ETB} resulta $\Omega\cdot\vec{\nabla} = \frac{d}{dz}$.
+
+El problema así planteado presenta simetría azimutal, por lo que resulta: $\int \int_{4\pi} dE' d\Omega' = \int dE' 2\pi \int \sin \theta d\theta$.
+
+Si el haz emergente está compuesto, casi exclusivamente por radiación primaria, ésta debe haber atravesado el material (paciente) prácticamente sin colisiones, es decir, que la integral aplicada al operador del \emph{kernel} $\int dE' 2\pi \int \sin \theta d\theta K(\vec{\Omega'}, E' \rightarrow \vec{\Omega}, E) ~ 0$ (operador nulidad).
+
+Por lo tanto, la ecuación de transporte de Boltzmann se reduce a:
+
+\begin{equation}
+ \frac{d}{dz} \Psi^{*} - S = 0
+\end{equation}
+
+Para $\Psi^{*}$ a lo largo del eze $z$.
+
+Además, la fuente de radiación $S$ es el flujo emitido por una fuente de modo tal que emergen rayos quasi paralelos con distribución quasi uniforme del frente onda, considerado plano y homoéneo. Es decir, $S = \Psi_{source} (z) = \Psi^{*}$.
+
+A partir de la expresión 20 es inmediato que $\Psi^{*}(z) = \Psi(z = 0) e^{-cz}$, conocida como ecuación de Lambert-Beer y describe la conocida relación de atenuación exponencial por parte de la radiación al atravesar un medio material. El análogo de este proceso a nivel microscópico es la penetración cuántica de la barrera de potencial, cuya solución coincide, como es de esperar.
+
+De este modo, se obtiene a partir de la ecuación de transporte de Boltzmann una expresión significativamente útil para describir, de modo aproximado, el comportamiento de los procesos de interacción en el ámbito de radiología. Bajo estas aproximaciones, se asume que las contribuciones de \emph{scattering} son despreciables, que el haz de radiación proviene de una fuente que emite luz en un frente de onda plano paralelo uniforme y en fase, así como que el medio irradiado es homogéneo e isotrópico.
+
+En definitiva, la relación encontrada, gracias a las relaciones unívocas descritas al inicio del capítulo, permite cuantificar flujo, fluencia (si se conocen las características energéticas del haz) y demás cantidades vinculadas. Por ejemplo, la intensidad del haz transmitido $I$ satisface:
+
+\begin{equation}
+ I(z) = I(z=0) e^{-\int dE dz \mu} = I(0) e^{- \int dE \mu(E) \Delta z} = I(0) e^{-\mu(E_{0}\Delta z}
+\end{equation}
+
+\noindent
+donde la última igualdad es válida para haces monocromáticos y $\mu$ se denomina coeficiente de absorción lineal.
+
+
+
+
+
+
+
+\CitationPrefix{\thechapter.}
+\bibliography{biblio}

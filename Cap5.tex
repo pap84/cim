@@ -1,0 +1,353 @@
+\chapter{Procesos estoc\'asticos}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO VI}}{ESPECIALIDAD III \ \textbf{M\'ODULO VI}}
+\label{CapVI}
+
+El \textit{Cap\'itulo} \ref{CapVI} est\'a dedicado a los elementos b\'asicos sobre procesos estoc\'asticos. Se introducen conceptos generales, 
+consideraciones estad\'isticas y fen\'omenos f\'isicos de carc\'acter intr\'insecamente aleatorio. Se dedica especial atenci\'on al 
+transporte de radiaci\'on en su caracter\'istica estoc\'astica.
+
+\section{Introducci\'on y definiciones de procesos estoc\'asticos}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_1}
+
+En los procesos estoc\'asticos se representan \underline{todos y cada uno} de los pasos necesarios para la realizaci\'on de un cieto evento 
+as\'i como tambi\'en los maneras en que cada uno de los pasos puede ser realizado en t\'erminos de las respectivas probabilidades. 
+%
+Por tanto, cualquier proceso en el que se vean involucradas probabilidades de ocurrencia resulta ser un proceso estoc\'astico.
+
+Al describir variables de car\'acter aleatorio, vinculadas a fen\'omenos de tipo probabil\'isticos como lo es el transporte de radiaci\'on, 
+es asumido, como premisa impl\'icita por defecto, el hecho de que las caracter\'isticas aleatorias permanecen constantes durante el 
+intervalo de tiempo de inter\'es, aunque desde una perspectiva gen\'erica podr\'ia no satisfacerse esta asumpci\'on.
+
+En efecto, al incorporar la dependencia (o evoluci\'on) de variables consideradas determin\'isticas, \'estas describir\'an un proceso 
+evolutivo de tipo anal\'itico, mientras que para el caso de variables aleatorias mostrar\'an una evoluci\'on condicionada por el v\'inculo
+al fen\'omeno probabil\'istico asociado.
+%
+Entonces, toda funci\'on definida a partir de variables aleatorias, como por ejemplo funciones de distribuci\'on o funciones de densidad, 
+presentar\'an dependencia temporal determinada por su car\'acter aleatorio, dando lugar a la naturaleza estoc\'astica del fen\'omeno f\'isico 
+involucrado.
+
+Una definici\'on m\'as formal de un proceso estoc\'astico es la siguiente:
+
+
+\textsl{ El proceso estoc\'astico consiste en el conjunto (o familia) de variables aleatorias $\{X_{t} t \in [t_{ini}, t_{fin}]\}$ que se
+ordenan de acuerdo con el \'indice $t$, por lo general identificando al tiempo.}
+
+En consecuencia, se tiene que para cada valor de $t$ (instante) existe la variable aleatoria representada por $X_{t}$, de modo que el 
+proceso estoc\'astico puede interpretarse como una sucesi\'on de variables aleatorias, las que pueden variar (evolucionar) en sus 
+caracter\'isticas.
+
+Los \textsl{estados de variables aleatorias} son los posibles valores que \'estas pueden asumir.
+%
+Por lo tanto, existe un \textsl{espacio de estados} asociados a las variables aleatorias.
+%
+En particular, la variable temporal $t$ puede ser de tipo discreto o bien de tipo continuo. La modificaci\'on de la variable $t$, por 
+ejemplo, dar\'ia lugar a cambios de estado que ocurren en el instante $t$.
+
+Por tanto, de acuerdo con el conjunto de \'indices\footnote{Estrictamente, sub\'indices.} $t \in T=[t_{ini}, t_{fin}]$, la variable 
+aleatoria $X_{t}$ puede clasificarse seg\'un los siguientes criterios para procesos estoc\'asticos:
+
+\begin{itemize}
+ \item Si el conjunto $T$ es continuo (por ejemplo $\Re^{+}$), resulta que $X_{t}$ describe un proceso estoc\'astico de par\'ametro continuo.
+ %
+ \item Si el conjunto $T$ es dicreto, $X_{t}$ describe un proceso estoc\'astico de par\'ametro discreto.
+ %
+ \item Si para cada valor (instante) $t$ la variable aleatoria $X_{t}$ es de tipo continuo, resulta que proceso estoc\'astico es de estado 
+ continuo.
+ %
+ \item Si para cada valor (instante) $t$ la variable aleatoria $X_{t}$ es de tipo discreto, resulta que proceso estoc\'astico es de estado 
+ discreto.
+\end{itemize}
+
+Una \textsl{cadena} es un proceso estoc\'astico para el cual el tiempo evoluciona de manera discreta y la variable aleatoria s\'olo puede 
+tomar valores discretos en el espacio de estados correspondiente. 
+%
+
+Un \textsl{proceso de saltos puros} es un proceso estoc\'astico para el cual los cambios de estados suceden de forma aislada y aleatoria 
+pero la variable aleatoria s\'olo asume valores discretos en el espacio de estados correspondiente. 
+%
+Diversamente, un \textsl{proceso continuo} se refiere al caso en que los cambios de estado se producen para cualquier valor de $t$ (instante)
+y hacia cualquier estado dentro de un espacio continuo de estados correspondiente.
+
+
+\subsection{Procesos de estado discreto y cadenas de Markov}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_2}
+
+En el caso de procesos estoc\'asticos con espacio de estados discreto, una secuencia de variables que indique el valor del proceso en 
+instantes sucesivos\footnote{Se asume que la variable $t$ refiere al tiempo.} puede representarse del siguiente modo:
+
+
+\begin{eqnarray}
+	\{ X_{0} = x_{0}, X_{1} = x_{1}, ... , X_{n} = x_{n} \}
+\label{EqLXXXIV}
+\end{eqnarray}
+
+donde cada variable $X_{j} \, \: j \in [1, n]$ presenta una distribuci\'on de probabilidades tal que, en general, es diferente de las otras 
+variables aunque podr\'ia haber caracter\'isticas comunes.
+
+Uno de los principales objetivos del estudio del caso discreto es el c\'alculo de proba-\-
+bilidades 
+de ocupaci\'on de cada estado a partir de las probabilidades de cambio de estado. 
+%
+Si para el valor $t_{j-1}$ (instante) el sistema est\'a en el estado $x_{j-1}$, la probabilidad 
+de que al 
+instante siguiente $t_{j}$ se encuentre en el estado $x_{j}$ se obtiene a partir de la 
+probabilidad de transici\'on o cambio de estado de $x_{j-1}$ a $x_{j}$ (o probabilidad 
+condicionada) denotada por $P\left( X_{j} = x_{j} / X_{j-1} = x_{j-1} \right) = P_{j, j-1}$, donde 
+$P_{j, j-1}$ es el valor que asume la probabilidad para el caso espec\'ifico en consideraci\'on.
+%
+
+Las probabilidades del tipo $P \left( X_{j} = x_{j} \right)$ se denominan probabilidades de 
+ocupaci\'on de estado.
+%
+
+De modo similar, otro tipo de probabilidad de inter\'es es la de ocupar un cierto estado en un 
+instante $t_{j}$, dado que en todos los 
+instantes anteriores, desde $t_{ini}$ a $t_{j-1}$ se conoce en qu\'e estados estuvo el proceso. 
+%
+En este caso, la probabilidad condicionada es 
+$P \left( X_{j} = x_{j} / X_{ini} = x_{ini}, \, ... , \, X_{j-1} = x_{j-1} \right) = 
+P_{ini, ..., j-1, j}$
+
+Por tanto, la probabilidad $P_{ini, ..., j-1, j}$ depende de toda la ``historia pasada del 
+proceso'', mientras que la probabilidad de transici\'on depende \'unicamente del estado actual que 
+ocupe el proceso.
+%\vspace{0.25cm}
+\newpage
+
+\textbf{Propiedad de Markov:}
+
+Se dice que un proceso cumple la propiedad de Markov cuando toda la historia pasada del proceso se puede resumir en la posici\'on actual 
+que ocupa el proceso para poder calcular la probabilidad de cambiar a otro estado. Es decir, se cumple:
+
+\begin{eqnarray}
+	P \left( X_{j} = x_{j} / X_{ini} = x_{ini}, \, ... , \, X_{j-1} = x_{j-1} \right) =  
+	P \left( X_{j} = x_{j} /  X_{j-1} = x_{j-1} \right)
+\label{EqLXXXVII}
+\end{eqnarray}
+
+
+Adem\'as, una propiedad importante que puede tener una cadena es que los valores $p_{mn} (j)$ no dependan del valor de $j$.
+%
+Entonces, se tiene que las probabilidades de cambiar de estado son las mismas en cualquier instante. 
+%
+Por lo tanto, esta propiedad indica que las probabilidades de transici\'on son estacionarias.
+
+
+\subsection{Procesos de saltos puros}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_3}
+
+En este caso, el proceso sigue siendo discreto en estados pero la gran diferencia es que los cambios de estado ocurren en cualquier 
+instante en el tiempo (tiempo continuo). 
+%
+
+Un proceso estoc\'astico en tiempo continuo $\{ N(t) \, t \ge 0 \}$ se denomina \textsl{proceso de conteo} si representa el n\'umero de 
+veces que ocurre un suceso hasta el instante de tiempo $t$.
+%
+
+En particular, se tiene $N(t) \in \mathbf{N}$ y $N(t^*) \le N(t) \, \; \forall t^* < t$.
+%
+
+Un proceso de conteo es un \textsl{proceso de Poisson homog\'eneo} de tasa $\lambda$ si satisface:
+
+\begin{enumerate}
+ \item $N(0) = 0$
+ \item $N(t_{k}) - N(t_{k-1})$ es una variable aleatoria independiente (proceso de incrementos independientes) $\forall \, k$.
+ \item $N(t + t^*) - N(t^*)$, que denota la cantidad de eventos que ocurren entre el instante $t^*$ y $t$, sigue una distribuci\'on de 
+ Poisson de par\'ametro $\lambda t$.
+\end{enumerate}
+
+
+\subsection{Procesos de estados continuos y series temporales}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_4}
+
+Un concepto importante en procesos estoc\'asticos es la \textsl{realizaci\'on}, o bien una realizaci\'on de una experiencia aleatoria, 
+que es el resultado de una repetici\'on de esa experiencia. 
+%
+Por tanto, en la experiencia aleatoria de ``lanzar una vez un dado'' una realizaci\'on posible ser\'ia obtener el n\'umero 2, en el \'unico 
+lanzamiento hecho. 
+%
+En ese caso, la realizaci\'on se reduce a un \'unico n\'umero $\{X\}$. 
+%
+Si se repite la experiencia, podr\'ian obtener otras realizaciones (cualquiera de los n\'umeros 1, 3, 4, 5 y 6).
+%
+
+En una experiencia $M$-dimensional, una realizaci\'on es el resultado obtenido de los $M$ par\'ametros, denotado por $\{X_{1}, ..., X_{M} \}$.
+%
+
+Una \textsl{serie temporal} es una realizaci\'on parcial de un proceso estoc\'astico de par\'ametro tiempo discreto.
+%
+De aqu\'i que la teor\'ia de los procesos estoc\'asticos es de aplicaci\'on a las series temporales.
+%
+Sin embargo, existe una fuerte restricci\'on que radica en el hecho de que en muchas series temporales, ellas son la \'unica realizaci\'on 
+observable del proceso estoc\'astico asociado.
+%
+
+\section{Caracter\'isticas y medidas de procesos estoc\'asticos}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_5}
+
+Para un espacio de estados $M$-dimensional, pueden calcularse cantidades y medidas estad\'isticamente representativas para los estados 
+descritos por las variables $M$-dimensionales.
+%
+En particular, se definen -entre tantos- medidas como tensores de valor medio y de covarianzas, que permiten obtener caracter\'isticas 
+representativas de los procesos estoc\'astico.
+%
+
+
+\begin{center}
+{\bf {blue}{Cap\'itulo 1 Manual PENELOPE v. 2008}}
+\end{center}
+
+
+
+\section{Procesos estoc\'asticos estacionarios}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_6}
+
+En primera aproximaci\'on, se considerar\'an estacionarios a los procesos estoc\'asticos que tengan un comportamiento constante a lo 
+largo del tiempo. 
+%
+
+Un \textsl{proceso estoc\'astico estacionario en sentido estricto} requiere que al realizar un mismo desplazamiento en el tiempo de todas 
+las variables de cualquier distribuci\'on conjunta finita se obtenga que esta distribuci\'on no var\'ia.
+%
+Es decir:
+
+\begin{eqnarray}
+	F \left( X_{i_1}, ... , X_{i_M} \right) =   F \left( X_{i_1 + j}, ... , X_{i_M + j} \right) \: \, \forall i_k , \, j
+\label{EqLXXXVIII}
+\end{eqnarray}
+
+
+En cambio, un \textsl{proceso estoc\'astico esestacionario en sentido d\'ebil} requiere que se mantengan constantes todas sus 
+caracter\'isticas lo largo del tiempo.
+%
+Es decir, que $\forall t$:
+
+\begin{enumerate}
+ \item $\langle X_t \rangle = \langle X \rangle \; \, \forall t$ donde $\langle X \rangle$ denota el valor medio o de expectaci\'on.
+ \item $\sigma_{X_t}  = \sigma_{X} \; \, \forall t$ donde $\sigma_{X}$ denota la varianza.
+ \item $Cov \left( t, t+j \right) = Cov \left( t^*, t^*+j \right) = C_{j} \, \; \forall j = 0, \pm 1, \pm 2, ...$ donde $Cov$ denota la 
+ covarianza y $C$ es una constante.
+\end{enumerate}
+
+
+\subsection{Procesos de ruido blanco}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_7}
+
+Un proceso estoc\'astico utilizado frecuentemente es el de ``ruido blanco'', dado por el proceso estacionario $RB_{t}$ que satisface:
+
+\begin{itemize}
+ \item $\langle RB_{t} \rangle = \langle RB \rangle = 0  \, \: \forall t$
+ \item $ Var(RB_{t}) = \sigma^2$
+ \item $ Cov(RB_{t}, RB_{t^*}) = 0 \; \, t^* \ne t$
+\end{itemize}
+
+En este sentido, puede interpretarse al ruido blanco como una sucesi\'on de valores sin relaci\'on alguna entre ellos, oscilando en torno 
+al cero dentro de un margen constante. 
+%
+En este tipo de procesos, conocer valores pasados no proporciona ninguna informaci\'on sobre el futuro ya que el proceso es ``puramente 
+aleatorio'', y por consiguiente ``carece de memoria''.
+
+\section{El transporte de radiaci\'on como proceso estoc\'astico}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_8}
+
+\begin{center}
+{\bf {blue}{Introducci\'on via secciones eficaces explicando analog\'ia pdf-DCS y explicar pag 6-15 Manual PENELOPE v. 2008}}
+\end{center}
+
+
+\section{Reformulaci\'on integral de la ecuaci\'on de transporte}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO V}}{ESPECIALIDAD III \ \textbf{M\'ODULO V}}
+\label{CapVI_9}
+
+A partir de la expresi\'on \'integro-diferencial de la ecuaci\'on de transporte de Boltzmann (\ref{EqX}), es posible reformular los 
+t\'erminos para arribar a una ecuaci\'on completamente integral, lo cual resulta de particular utilidad para el manejo de soluciones 
+de tipo num\'ericas, necesarias para situaciones realistas, ya que -como se sabe- las soluciones anal\'iticas directas s\'olo son 
+posibles en una cantidad miuy limitada de configuraciones.
+%
+
+Operando y reordenando los t\'erminos en la ecuaci\'on de Boltzmann \ref{EqX}, resulta:
+
+
+\begin{eqnarray}
+ t = t_{0} + \frac{s}{\lvert\vec{v}\rvert}       \nonumber \\
+ \vec{r} = \vec{r_{0}} + s\, \vec{\Omega}
+ \label{EcXI}
+\end{eqnarray}
+
+Por lo tanto, se obtiene:
+
+\begin{eqnarray}
+	\frac{d}{d s} \, \Psi \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega}, E, t_{0} +\frac{s}{\lvert\vec{v}\rvert}  \right) + 
+	\Sigma \; \Psi \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega}, E, t_{0} +\frac{s}{\lvert\vec{v}\rvert} \right)
+	= \\
+	\Gamma \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega}, E, t_{0} +\frac{s}{\lvert\vec{v}\rvert} \right)
+ \label{EqXII}
+\end{eqnarray}
+
+donde se ha definido $\Gamma \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega}, E, t_{0} +\frac{s}{\lvert\vec{v}\rvert} \right)$ como sigue:
+
+\begin{equation}
+ \Gamma \equiv S + \iint \, \Sigma _{s} \left( \vec{r_{0}} + s \vec{\Omega}, (\vec{\Omega'}, E') \rightarrow (\vec{\Omega}, E)  \right)
+	\Psi \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega'}, E', t_{0} +\frac{s}{\lvert\vec{v}\rvert}  \right) \, \, d \, \vec{\Omega'} \, d \, E'
+ \label{EqXIII} 
+\end{equation}
+
+Puede verse\footnote{\underline{Hint:} Introd\'uzcase $e^{ \int _{-\infty} ^{s} \, \, \Sigma \left( \vec{r_{0}} + s' \vec{\Omega}, E \right) \, \, ds'}$
+y calc\'ulese $\frac{d}{d s} \Psi $ .}
+
+\begin{equation}
+ 	\Psi \left( \vec{r_{0}}, \vec{\Omega}, E, t_{0} \right) = \int  _{-\infty} ^{0} \, \: ds \left[ e^{ \int _{0} ^{s} 
+ 	\Sigma \left( \vec{r_{0}} - s' \vec{\Omega}, E \right) \, ds' }  \; \: 
+ 	\Gamma \left( \vec{r_{0}} + s \vec{\Omega}, \vec{\Omega}, E, t_{0} +\frac{s}{\lvert\vec{v}\rvert} \right) \right]
+ \label{EqXIV} 
+\end{equation}
+
+
+Considerando que las variables $\vec{r_{0}}$ y $t_{0}$ son arbitrarias, se obtiene:
+
+\begin{eqnarray}
+ 	\Psi \left( \vec{r}, \vec{\Omega}, E, t \right) =   %\nonumber \\
+ 	 \int  _{0} ^{\infty} \, \: e^{ \int _{0} ^{s} \Sigma \left( \vec{r_{0}} - s' \vec{\Omega}, E \right) \, ds' }  \; \cdotp \; \: \nonumber \\
+ 	\left[ \iint \Sigma_{s} \left( \vec{r} - s \vec{\Omega}, (\vec{\Omega'}, E') \rightarrow (\vec{\Omega}, E)  \right)
+ 	\Psi \left( \vec{r} - s \vec{\Omega}, \vec{\Omega}, E, t - \frac{s}{\lvert\vec{v}\rvert} \right) %\nonumber \\
+ 	+  S \left( \vec{r} - s' \vec{\Omega}, \vec{\Omega}, E, t  \right)  \right]
+        %\right]
+ \label{EqXV} 
+\end{eqnarray}
+
+Es decir, se obtuvo una forma integral para la ecuaci\'on de Boltzmann, que puede escribirse en t\'ermino de operadores\footnote{Resulta conveniente
+expresar la ecuaci\'on de este modo para la resoluci\'on num\'erica de la misma, por ejemplo utilizando m\'etodos estad\'isticos como Monte Carlo.}:
+
+
+\begin{equation}
+ 	\Psi = \mathbf{K} \; \Psi + S'
+ \label{EqXVI} 
+\end{equation}
+
+Se obtiene la soluci\'on para el flujo:
+
+\begin{equation}
+ 	\Psi = \Sigma _{i=0} ^{\infty} \Psi_{i}
+ \label{EqXVII} 
+\end{equation}
+
+Donde los t\'erminos son:
+
+\begin{eqnarray}
+ 	\Psi_{i} = \mathbf{K} \; \Psi_{i-1} \nonumber \\
+ 	\Psi_{0} = S'
+ \label{EqXVIII} 
+\end{eqnarray}
+
+Matem\'aticamente, la soluci\'on obtenida se denomina serie de von Neuman. La interpretaci\'on f\'isica del formalismo desarrollado es particularmente
+apropiada en el v\'inculo entre los t\'erminos de la serie y los procesos f\'isicos involucrados. El t\'ermino de orden 0 se refiere al flujo primario
+estrictamente proveniente de la fuente de emisi\'on $S$, mientras que los t\'erminos $\Psi_{i}$ son las contribuciones de \textit{scattering} a orden $i$
+obtenidas a partir del operador del \textit{kernel de scattering} $\mathbf{K}$.

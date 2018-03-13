@@ -1,0 +1,597 @@
+\chapter{Sistemas de detecci\'on de uso radiol\'ogico}
+% \chapterauthors{M. Valente \& P. Pérez
+% \chapteraffil{Carnegie Mellon University, Pittsburgh, Pennsylvania}
+% }
+
+El \textit{Cap\'itulo} \ref{CapIII} presenta descripciones breves respecto de los principios de funcionamiento y detalles t\'ecnicos 
+de los sistemas de detecci\'on de radiaci\'on m\'as com\'unmente empleados en el \'ambito de radiodiagn\'ostico.
+
+En l\'ineas generales, los detectores de radiaci\'on presentan similitudes en cuanto a su comportamiento.
+%
+
+%
+Los efectos de interacci\'on entre la radiaci\'on y la materia son la base que determina de modo un\'ivoco las propiedades de los sistemas de
+detecci\'on. En particular, el tipo de material del detector depende propiamente de la clase de radiaci\'on as\'i como de la informaci\'on que 
+es necesario recavar.
+%
+
+%
+La operatividad de los sistemas de detecci\'on deben contar con las siguientes etapas:
+
+\begin{itemize}
+ \item Ingreso de la radiaci\'on al sistema de detecci\'on.
+ \item Interacci\'on de la radiaci\'on con el ``material sensible'' que constituye el sistema de detecci\'on.
+ \item Efectos por interacci\'on de la radiaci\'on con el material sensible: p\'erdida de toda o parte de su energ\'ia cin\'etica por 
+ medio de transferencias a los electrones de los \'atomos del material sensible.
+ \item Producci\'on de corrientes de electrones (de energ\'ias relativamente bajas).
+ \item Recolecci\'on de la corriente de electrones.
+ \item An\'aslisis mediante circuito electr\'onico.
+ \item Procesamiento con dispositivos digitales (opcional).
+\end{itemize}
+
+En t\'erminos del tipo de radiaci\'on a detectar, puede mencionarse, esquem\'aticamente:
+
+
+\begin{description}
+ \item[Determinaci\'on del tipo de part\'icula] Identificar el tipo de part\'icula (que resulta cr\'itico en el caso de un campo mixto,
+ como ocurre en procesos nucleares) es necesario utilizar materiales sensibles en los que ya sea la carga o la masa de cada tipo de
+ part\'icula pueda generar efectos distintivos.
+ \item[Tiempo de emisi\'on de radiaci\'on] Medir el tiempo en el que la radiaci\'on fue emitida rquiere de materiales sensibles en los 
+ que sea posible una r\'apida recolecci\'on de los pulsos de corriente de electrones producidas por las interacciones.
+ \item[Energ\'ia de la radiaci\'on] Determinar la energ\'ia de la radiaci\'on implica utilizar detectores en los que la amplitud de los 
+ pulso detectados resulte proporcional a la energ\'ia de la radiaci\'on que provoc\'o el pulso. El material sensible debe ser 
+ de alto n\'umero de electrones disponibles de modo que se minimicen p\'erdidas y fluctuaciones.
+ \item[Polarizaci\'on de la radiaci\'on] La medici\'on del spin o la polarizaci\'on requiere de detector capaces de separar los diferentes 
+ estados de polarizaci\'on de la radiaci\'on. En general, no alcanza solo con materiales sensibles, sino que debe acudirse al dise\~no de 
+ arreglos espec\'ificos para detecci\'on.
+ \item[Tasa de conteo de flujo] Para determinaciones de alta tasa de conteo, es necesario emplear detectores de r\'apida 
+ recuperaci\'on capaces de reiniciar el conteo de eventos sucesivos. Contrariamente, para mediciones de tasas de conteo muy bajas,
+ lo m\'as importante es la minimizaci\'on del ruido de fondo.
+\end{description}
+
+\section{Procesos para la detecci\'on de radiaci\'on electromagn\'etica}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_1}
+
+Los fotones (restringiendo al campo de aplicaci\'on en radiodiagn\'ostico, refiere a rayos X y $\gamma$) interactuan con la materia 
+por medio de diferentes tipos de procesos: \textit{scattering} Compton, creaci\'on de pares y absorci\'on fotoel\'ectrica.
+
+A continuaci\'on se incluye Una descripci\'on brev\'isima estos procesos:
+
+\begin{center}
+\underline{\textit{Scattering} Compton}
+\end{center}
+
+El \textit{scattering} Compton es el proceso por el cual un fot\'on incidente cambia el estado de fase, modificando potencialmente 
+direcci\'on de movimiento $\vec{\Omega}$ y energ\'ia cin\'etica $E$ por interacciones con electrones de los orbitales at\'omicos, los que 
+inicialmente pueden considerarse pr\'acticamente libres\footnote{Las energ\'ias de ligadura t\'ipicas son mucho menores a 
+las del fot\'on incidente} adquieren casi toda la energ\'ia cin\'etica liberada por el fot\'on incidente. En este sentido, aproximando por 
+electr\'on en reposo y libre se aplica la conservaci\'on de momento y energ\'ia para describir los cambios de fase.
+%
+
+%
+\begin{center}
+\underline{Producci\'on de pares}
+\end{center}
+
+Este proceso refiere a la interacci\'on de un fot\'on incidente energ\'etico con la materia de modo de producir pares electr\'on-positr\'on
+como consecuencia de acoplamiento con el campo at\'omico. La energ\'ia cin\'etica es cedida para el equivalente en masa de par 
+part\'icula-antipart\'icula, y eventual sobrante es transferido como energ\'ia coin\'etica a las part\'iculas creadas.
+%
+
+%
+Por lo tanto, existe un valor umbral para la energ\'ia por encima del cual es posible el efecto: 
+$E_{umbral} = 2 \, m_{e} c^{2} = 1.022 \, MeV$.
+
+\begin{center}
+\underline{Absorci\'on fotoel\'ectrica}
+\end{center}
+
+El fot\'on incidente es absorbido por parte del \'atomo de modo que uno de los electrones at\'omicos, denominado fotoelectr\'on es 
+liberado a expensas de la energ\'ia cin\'etica adquirida. Los electrones libres no pueden absorber fotones para cumplir simult\'aneamente 
+con la conservaci\'on de la energ\'ia y el momento, motivo por el cual no se produce este efecto para electrones libres. La energ\'ia 
+cin\'etica del electr\'on de ionizaci\'on (liberado) equivale a la energ\'ia del fot\'on incidente menos la energ\'ia de ligadura del 
+electr\'on eyectado.
+%
+
+%
+La determinaci\'on de la probabilidad de absorci\'on de un fot\'on por efecto fotoel\'ectrico muestra algunas caracter\'isticas 
+espec\'ificas, como que es mayor para para energ\'ias bajas\footnote{Energ\'ias menores a 100keV, aproximadamente.}, aumenta 
+significativamente seg\'un el n\'umero at\'omico $Z$ y disminuye seg\'un aumente la energ\'ia del fot\'on incidente $E$.
+%
+
+%
+A partir de los procesos mencionados, se propone una cantidad para intengrar los efectos netos denominada coeficiente de 
+atenuaci\'on m\'asico, el cual se describe del siguiente modo: Se considera un haz perfectamente colimado de fotones de energ\'ia $E$
+producidos por una fuente $S$ e incidiendo sobre un material de n\'umero at\'omico $Z$ y espesor $d$ (a lo largo del \textit{path}).
+%
+Por lo tanto, en los procesos de interacci\'on, los fotones del haz incidente pueden sufrir absorci\'on fotoel\'ectrica, \textit{scattering}
+Compton o producci\'on de pares. De modo que, solo parte de los fotones incidentes alcanzar\'an el detector ubicado detr\'as\footnote{En 
+el sentido del haz incidente.} del blanco irradiado. En particular, alcanzar\'an el detector los fotones que no hayan interactuado.
+%
+
+%
+La probabilidad total por unidad de longitud $d s$ de que un fot\'on incidente no alcance al detector, se denomina coeficiente de 
+atenuaci\'on lineal total y representa la integraci\'on de todas las probabilidades correspondientes a cada uno de los posibles procesos de
+interacci\'on involucrados.
+
+
+\section{Procesos para la detecci\'on de neutrones}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_2}
+
+
+La detecci\'on de neutrones presenta algunas caracter\'isticas similares al caso de los fotones, debido a la propiedad de no poseer carga. 
+Sin embargo, por su naturaleza intr\'inseca, los procesos involucrados son radicalmente diferentes.
+%
+
+%
+Los neutrones no interactuan el\'ectricamente con los \'atomos, pero s\'i presentan interacciones fuerte con los n\'ucleos por medio de
+una amplia variedad de procesos, entre ellos:
+
+\begin{itemize}
+ \item Colisiones el\'asticas, que son relevantes para energ\'ias $\approx \, 1 MeV$,  denominados neutrones r\'apidos).
+ \item Colisiones inel\'asticas que son relevantes para valores de energ\'ia superiores al umbral de excitaci\'on nuclear.
+ \item Captura de neutrones, proceso por el cual el n\'ucleo captura neutrones incidentes constituyendo un nuevo n\'ucleo, que eventualmente
+ puede sufrir transiciones para desexcitarse. Este efecto var\'ia seg\'un la velocidad de los neutrones, aproximadamente inversamente 
+ proporcional a \'esta.
+ \item Otras reacciones nucleares de tipo $(n,p)$, $(n,d)$, etc que representan captura de un neutr\'on y emisi\'on de part\'iculas cargadas.\,
+ Este proceso ocurre en el rango de algunos eV a keV.
+ \item Fisi\'on: A energ\'ias ``t\'ermicas'' (del orden del eV), los neutrones se denominan neutrones t\'ermicos o lentos. Este proceso da 
+ lugar a la fragmentaci\'on nuclear.
+ \item Producci\'on de una \textit{hadronic shower}, efecto que ocurre en el rango de energ\'ias por arriba de unos cientos de keV,
+ provocando la emisi\'on de part\'iculas cargadas.
+\end{itemize}
+
+Los mecanismos de interacci\'on de los neutrones hacen que su detecci\'on resulte particularmente compleja.
+%
+
+%
+Sin embargo, existen algunas t\'ecnicas y sistemas de detecci\'on capaces de brindar informaci\'on a cerca del campo de neutrones. 
+%
+Aunque, el mayor desaf\'io refiere a las dificultades asociadas a determinaciones en campo mixto.
+
+\section{Procesos para la detecci\'on de electrones}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_3}
+
+
+Los electrones y los positrones interactuan por medio de \textit{scattering} con los electrones orbitales at\'omicos con las siguientes 
+caracter\'isticas:
+
+\begin{itemize}
+ \item Algunos electrones, particularmente los emitidos en las desintegraciones $\beta$, viajan con velocidades relativistas.
+ \item Los electrones sufrir\'an cambios significativos en la direcci\'on de movimiento como consecuencia de las colisiones con otros 
+ electrones. Por tanto, describen trayectorias err\'aticas (\textit{track}). 
+ \item En colisiones frontales con electrones at\'omicos se transfiere una fracci\'on muy importante de la energ\'ia cin\'etica inicial 
+ que es adquirida por el electr\'on impactado. Adem\'as, debe destacarse que en estos casos, resulta indistinguible el electr\'on 
+ incidente del eyectado.
+ \item Debido a cambios abruptos en direcci\'on de movimiento y m\'odulo de la velocidad (energ\'ia cin\'etica), el electr\'on 
+ sufre grandes aceleraciones. Como consecuencia, se emite radiaci\'on electromagn\'etica conocida como \textit{Bremsstrahlung}.
+\end{itemize}
+
+
+\section{Procesos para la detecci\'on de part\'iculas cargadas pesadas}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_4}
+
+Debido a que los n\'ucleos del material del detector ocupan solamente en torno a 10-15 del volumen de sus \'atomos, resulta unos tres 
+\'ordenes m\'as probable para una part\'icula el colisionar con un electr\'on que con un n\'ucleo. Por tanto, el mecanismo de p\'erdida 
+de energ\'ia dominante para las part\'iculas cargadas es el \textit{scattering} Coulombiano por los electrones at\'omicos del material 
+sensible que compone el detector.
+%
+
+%
+Si bien el \textit{scattering} Coulombiano de part\'iculas cargadas por los n\'ucleos, denominado \textit{scattering} Rutherford, es un 
+proceso importante en f\'isica nuclear, tiene poca influencia en la p\'erdida de energ\'ia de las part\'iculas cargadas a lo largo de su 
+trayectoria dentro del detector. 
+%
+
+%
+Se aplican los principios de conservaci\'on de la energ\'ia y momento en colisiones frontal el\'asticas entre part\'iculas pesadas 
+incidentes de masa $M$ y electrones de masa $m_{e}$, supuestos en reposo, para determinar as\'i las probabilidades de los efectos de 
+interacci\'on que dan lugar a las secciones eficaces.
+%
+
+%
+La gran cantidad de eventos de colisi\'on entre part\'icula cargada masiva y electrones del medio material oriogina, entre otras 
+consecuencias:
+
+\begin{itemize}
+ \item Una gran cantidad de colisiones antes de que la part\'icula ceda toda su energ\'ia cin\'etica. Colisiones frontales generan la 
+ m\'axima transferencia posible de energ\'ia. En el resto de las colisiones, la transferencia en general ser\'a mucho menor.
+ \item En colisiones entre una part\'icula cargada pesada y un electr\'on, la part\'icula cargada pesada es desviada un \'angulo 
+ despreciable, por lo que \'esta sigue una trayectoria pr\'acticamente rectil\'inea.
+ \item Dado que la fuerza Coulombiana es de alcance infinito, la part\'icula cargada masiva interactua de modo simultaneo con muchos 
+ electrones a la vez, de modo que pierde energ\'ia continua y gradualmente durante la trayectoria. Habiendo recorrido cierta distancia, 
+ denominada rango, perder\'a toda la energ\'ia cin\'etica.
+\end{itemize}
+
+\section{Detectores gaseosos}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_5}
+
+
+Existen diferentes tipos de sistemas de detcci\'on gaseosos. Esta denominaci\'on proviene del hecho de que el material sensible utilizado 
+para la detecci\'on es un gas.
+
+
+\subsection{C\'amaras de ionizaci\'on}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_6}
+
+Los detectores basados en ionizaci\'on est\'an formados esencialmente por un recinto donde se encuentra un gas a presi\'on controlada, all\'i se colocan dos 
+electrodos separados una cierta distancia, a los que se aplica una tensi\'on de polarizaci\'on.
+
+El gas dentro del recinto no es conductor el\'ectrico en condiciones normales, por lo tanto no circula corriente el\'ectrica entre los electrodos. Cuando una
+part\'icula del haz ionizante interact\'ua con el gas pueden generarse efectos de ionizaci\'on produciendo pares i\'on-electr\'on. El campo el\'ectrico 
+someter\'a a las cargas liberadas de modo que se muevan hacia el electrodo de signo contrario; los electrones hacia el \'anodo y los iones hacia el c\'atodo.
+
+La colecci\'on de estas cargas se logra utilizado un dispositivo el\'ectrico asociado al detector, sea midiendo la corriente media que se generada en el 
+detector debido a la interacci\'on de varias part\'iculas (c\'amaras que operan en modo corriente) o bien formando un pulso con cada golpe de carga que 
+recogen los electrodos (c\'amaras que operan en modo impulso).
+
+Para aplicaciones dosim\'etricas, la c\'amara de ionizaci\'on es un dos\'imetro denominado \textit{standard primario}, ya que adem\'as de ser el sistemas m\'as difundido y utilizado 
+universalmente con buena \textit{performance}, sus propiedades permiten obtener mediciones confiables y estables en base a un sistema relativamente simple 
+lo que, sumado a teor\'ias s\'olidas respecto de sus principios de funcionamiento, representa una importante ventaja en t\'erminos de estabilidad y 
+confiabi-\-
+lidad. En este sentido, visto que el funcionamiento del sitema dosim\'etrico est\'a sustentado por teor\'ia de cavidad, como Bragg-Gray, resulta que 
+una de las principales caracter\'isticas es el volumen sensible requiere ser determinado de manera particularmente precisa.
+
+En t\'erminos de su uso pr\'actico, la c\'amara de ionizaci\'on se utiliza coloc\'andola expuesta al haz de radiaci\'on o bien introducida en un medio 
+material, fantoma, para determinar exposici\'on en aire o bien dosis absorbida en el medio material, t\'ipicamente agua o medios similares en cuanto a las 
+propiedades de absorci\'on/dispersi\'on de radiaci\'on ionizante en los rangos de inter\'es. 
+Este tipo de medios materiales se denomina ``tejido-equivalentes''. Por tanto, resulta importante tambi\'en conocer las propiedades
+del medio material gaseoso en el que se producen los procesos que permiten determinar la dosis absorbida en la cavidad gaseosa.
+
+Existen distintos tipos de c\'amaras de ionizaci\'on. Las m\'as utilizadas son la c\'amara tipo dedal, com\'unmente denominada c\'amara de tipo \textit{Farmer}
+y, aunque en menor medida, tambi\'en la c\'amara de ionizaci\'on de tipo plano-paralela.
+
+De hecho, las c\'amaras de ionizaci\'on pueden clasificarse, seg\'un su dise\~no, o m\'as espec\'ificamente seg\'un la forma de los electrodos: 
+existen configuraciones planas o
+cil\'indri-\-
+cas, seg\'un la disposici\'on de los electrodos, que pueden ser  planos-paralelos (c\'amara plano-paralela usualmente denominada Markus), o bien
+cil\'indricos, constitu\'idos por un electrodo hueco de forma de cil\'indrica y otro interior en forma de alambre o varilla en dispuesto coaxialmente 
+(c\'amara de tipo dedal usualmente llamada Farmer).
+
+El volumen sensible de las c\'amaras de ionizaci\'on se rellenan t\'ipicamente con una variedad de gases que puede ser aire a 
+presi\'on atmosf\'erica o bien
+gases nobles, especialmente arg\'on.
+
+El rendimiento de detecci\'on, definido como la fracci\'on de de radiaci\'on detectada res-\-
+pecto del total que atraviesa el volumen sensible del detector, es
+muy pr\'oxima al 100\% para la c\'amara de ionizaci\'on para el caso de la detecci\'on de part\'iculas $\alpha$ (n\'ucleos de helio) y $\beta$ (electrones
+y positorones), mientras que para fotones el rendimiento ronda solo el 1\%, debido a las propiedades intr\'insecas de los mecanismos de interacci\'on de
+cada tipo de radiaci\'on.
+
+La c\'amara de ionizaci\'on forma parte de una categor\'ia de detectores denominados gaseosos normalmente llamados tambi\'en ``detectores de ionizaci\'on'', 
+debido a que este tipo de dispositivos responden a la radiaci\'on por medio de corrientes inducidas por ionizaci\'on.
+
+Adem\'as de la c\'amara de ionizaci\'on, cabe destacar otros dos tipos de detectores gaseosos, his\'orica y a\'un frecuentemente utilizados.
+
+\subsection{Contador proporcional}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_7}
+
+En el caso de la c\'amara de ionizaci\'on, el voltage aplicado resulta ser aquel suficiente para colectar solo las cargas liberadas por acci\'on directa de 
+la raiaci\'on incidente. Sin embargo, si se aumenta a\'un m\'as el voltaje aplicado, los iones atraidos ganan tanta energ\'ia que podr\'ian generar ionizaciones 
+adicionales durante el recorrido hacia los electrodos, y los electrones producidos por estas ionizaciones pueden, a su vez, generar otros, constituyendo un 
+efecto en cascada, lo que se conoce como \textit{efecto de amplificaci\'on de la carga por el gas}. El factor por el cual la ionizaci\'on original es 
+``multiplicada'' se denomina \textit{factor de amplificaci\'on del gas}. El valor de esta factor aumenta r\'apidamente al aumentar el voltage aplicado y puede 
+llegar a valores cercanos a $10^{6}$. Los detectores que operan en este regimen se conocen como contadores proporcionales, y la carga neta puede obtenerse de 
+$Q=W*f$, donde $f$ es el factor de amplificaci\'on del gas. Por lo tanto la carga total producida resulta proporcional a la energ\'ia depositada por la 
+radiaci\'on ionizante incidente. En general, los contadores proporcionales utilizan gases que permiten la migraci\'on los iones producidos con muy alta 
+eficiencia, como los gases nobles, entre lo cuales Ar y Xe son los mas com\'unmente empleados.
+
+\subsection{Contador Geiger-M\"uller}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_8}
+
+Los detectores Geiger-M\"uller son detectores gaeosos dise\~nados para obtener la m\'axima amplificaci\'on posible.
+
+El \'anodo central es mantenido a muy alto potencial en relaci\'on al cilindro exterior (c\'atodo). Al producirse ionizaciones dentro de la cavidad de gas por 
+interacci\'on de la radiaci\'on incidente, los electrones son acelerados hacia el \'anodo central y los iones positivos al c\'atodo exterior. En este proceso 
+ocurre la amplificaci\'on del gas. Pero, debido a que el voltaje aplicado es tan alto, los electrones colectados pueden causar excitaciones de las mol\'eculas 
+del gas. Estas mol\'eculas se desexcitan r\'apidamente ($\approx 10^{-9}$s) emitiendo fotones visibles o UV. Si alguno de estos fotones UV interact\'ua con en 
+el gas o en el c\'atodo, puede ocurrir fotoabsorci\'on, lo cual genera otro electr\'on para contribuir en el efecto cascada.
+%
+
+%
+En el caso de los dispositivos de Geiger M\"uller se presenta el problema de que durante la trayectoria de los iones, \'estos pueden ser 
+acelerados y alcanzar el \'anodo con la suficiente energ\'ia para liberar electrones y empezar el proceso de nuevo. Esto se debe a 
+la naturaleza del proceso de avalancha m\'ultiple en el tubo Geiger, basta con un electr\'on para crear un pulso de salida. Para evitar 
+este efecto, se acostumbra a agregar un segundo gas denominado \textit{quenching gas}, o gas de extinci\'on, compuesto por mol\'eculas 
+org\'anicas complejas\footnote{El gas de  material sensible, gas primario, es t\'ipicamente aire o un gas noble como arg\'on}.
+Se utiliza concentraciones t\'ipicas de 90\% de gas primario y 10\% de gas de extinci\'on.
+
+
+\section{Detectores de estado l\'iquido y s\'olido}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_9}
+
+Estudiados los detectores gaseosos, resulta que presentan algunas desventajas, principalmente asociadas a baja eficiencia para muchos tipos 
+de radiaciones, por ejemplo rayos $\gamma$ de 1 MeV, ya que en aire recorre unos 100 m.
+%
+
+%
+Los detectores de estado s\'olido, que presentan 
+densidades mucho mayores, cuentan con la probabilidad de absorci\'on en dimensiones razonables de tama\~no de detecci\'on.
+%
+
+%
+La principal caracter\'istica de los detectores de estado s\'olido es el uso de matriales s\'olidos para el sensor, es decir material sensible. Desde un
+punto de vista general, la utilizaci\'on de materiales sensibles de mayor densidad, prov\'e \textit{a priori} mayor eficiencia en la detecci\'on en cuanto
+mayor resulta la cantidad de eventos de interacci\'on, relativamente al caso de materiales gaseosos. Sin embargo, debido a los requerimientos espec\'ificos
+para producir efectos secundarios mensurables capacer de ser directa y un\'ivocamente correlacionados con la energ\'ia absotbida por el material, resulta 
+que solo algunos pocos materiales de estado s\'olido son \'utiles como material sensible.
+%
+
+%
+Para crear un detector de estado s\'olido debe estudiarse el compromiso entre:
+
+\begin{enumerate}
+ \item El material debe ser capaz de soportar un campo el\'ectrico grande, de manera que los electrones y los iones puedan ser recogidos 
+ para formar un pulso electr\'onico. Adem\'as en ausencia de radiaci\'on el flujo de corriente debe ser m\'inimo o nulo para que el ruido 
+ de fondo sea bajo. 
+ \item Los electrones deben ser f\'acilmente extra\'idos de los \'atomos del material sensible y en gran n\'umero. Electrones e iones deben 
+ ser capaces de viajar f\'acilmente en el material.
+\end{enumerate}
+
+La primera condici\'on parece exigir un material aislante, mientras que la segunda sugiere usar un conductor. El compromiso, en definitiva, 
+es un semiconductor. Materiales semiconductores de tama\~no suficientemente grande para construir detectores de radiaci\'on (de algunas 
+decenas de $cm^{3}$) reci\'en estuvieron disponibles a partir de la d\'ecada de 1960.
+
+\subsection{Detectores centelladores}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_10}
+
+ Durante la d\'ecada de 1950, debido a la imposibilidad de disponer de materiales semiconductores de dimensiones apropiadas para detecci\'on 
+ de radiaci\'on, se desarrollaron los detectores basados en materiales centellantes para aplicaciones en dispositivos de espectroscop\'ia 
+ nuclear logrando razonable alta eficiencia resoluci\'on.
+ 
+\begin{center}
+\textbf{Detectores semiconductores}
+\end{center}
+
+Los detectores semiconductores son, escencialmente, an\'alogos a los detectores gaseosos. Sin embargo, los materiales s\'olidos de los 
+semiconductores ofrecen 
+importantes ventajas comparativas, ya que cuentan con densidad muy superior a la de los gases\footnote{entre 2 y 5 mil veces mayor, 
+aproximadamente. Por ejemplo: 
+$\rho_{Si(Li)}=2.33gcm^{-3}$, $\rho_{Ge(Li)}=5.32gcm^{-3}$, $\rho_{Cd(Te)}=6.06gcm^{-3}$ y $\rho_{Aire}=0.001297gcm^{-3}$}. Por lo tanto, 
+presenta valores mucho 
+mas altos para el \textit{stopping power}, resultando materiales mucho mas eficientes para la detecci\'on de radiaci\'on.
+%
+
+%
+Los semiconductores son, en general, pobres conductores de corriente el\'ectrica, sin embargo cuando est\'an ionizados por acci\'on de la 
+radiaci\'on incidente, 
+por ejemplo, la carga el\'ectrica producida puede colectarse por medio de la aplicaci\'on de un voltaje externo. Los materiales m\'as 
+comunes para construir 
+detectores semiconductores son silicio y germanio, aunque m\'as recientemente se est\'a estableciendo tambi\'en el teluro de cadmio. 
+Para estos materiales, una 
+ionizaci\'on ocurre cada 3 a 5 eV de energ\'ia absorbida de la radiaci\'on incidente, aproximadamente, lo cual constituye otra importante 
+ventaja comparativa 
+respecto de los detectores gaseosos. Adem\'as, la amplitd de la se\~nal el\'ectrica detectada est\'a relacionado proporcionalmente con la 
+energ\'ia absorbida, y 
+por ello pueden ser utilizados para discriminar en energ\'ia.
+%
+
+%
+Algunas desventajas o inconvenientes de estos dispositivos son: generan corrientes no despreciables a temperatura ambiente, lo cual genera 
+un ruido tipo 
+\textit{background} en la se\~nal medida, y por tanto deben ser operados a bajas temperaturas. Otro inconveniente es la presencia de 
+impurezas en la matriz del 
+material, lo cual arruina la configuraci\'on cristalina pura. Estas impurezas crean ``trampas'' electr\'onicas que pueden atrapar electrones 
+generados en 
+ionizaciones, evitando que sean colectados por los electrodos. Este efecto puede resultar en una apreciable disminuci\'on en la se\~nal 
+el\'ectrica medida y 
+limita el espesor pr\'actico del material sensible a tama\~nos no mayores a 1cm, aproximadamente. Y, debido al bajo n\'umero at\'omico de 
+Si y Ge, este hecho 
+limita la posibilidad de emplearlos para detectar fotones, o incluso part\'iculas cargadas, de alta energ\'ia. 
+%
+
+%
+El paso de la radiaci\'on ionizante a trav\'es de los materiales genera ionizaciones y/o excitaciones. En el caso particular en que las 
+especies producidas, 
+o residuos,
+(ionizadas o excitadas) sufran procesos de recombinaci\'on, se obtiene como resultado la liberaci\'on de energ\'ia. En general, la mayor 
+parte de esta energ\'ia 
+es disipada en el medio como energ\'ia t\'ermica, por medio de vibraciones moleculares, en el caso de gases y l\'iquidos, o vibraciones de 
+red en el caso de 
+s\'olidos cristalinos. Sin embargo, existen materiales en los que parte de esta energ\'ia es transferida a emisi\'on de luz visible. Estos 
+materiales 
+particulares se denominan centelladores y los detectores de radiaci\'on que los utilizan son llamados detectores centelladores.
+%
+
+%
+Los materiales mas com\'unmente utilizados para detectores de aplicaci\'on en medicina son de tipo org\'anico (substancias org\'anicas 
+diluidas en soluci\'on 
+l\'iquida) o inorg\'anicos (substancias inorg\'anicas en forma de s\'olido cristalino). Si bien los mecanismos precisos de centelleo son 
+diferentes para estos 
+dos tipos de materiales, comparten caracter\'isticas comunes. La cantidad de luz producida como consecuencia  de la interacci\'on con un 
+\'unico rayo incidente 
+(RX, $\gamma$, $\beta$, etc.) resulta proporcional a la energ\'ia depositada por la part\'icula incidente en el material centellador. La 
+cantidad de luz neta 
+producida es peque\~na, t\'ipicamente unos pocos cientos (a lo sumo miles) de fotones por cada interacci\'on de part\'icula incidiendo 
+con energ\'ia de 
+entre 70 y 511 keV.
+%
+
+%
+Originalmente, se utilizaban cuartos oscuros para observar la luz emitida por este tipo de materiales\footnote{Por entonces t\'ipicamente 
+centelladores de 
+sulfuro.} y contabilizar as\'i la producci\'on de ionizaciones. Esta metodolog\'ia presenta insalvables limitaciones y fue posteriormente 
+reemplazada por 
+tecnolog\'ias de dispositivos electr\'onicos ultrasensibles a la luz, como los fotomultiplicadores.
+%
+
+%
+Los detectores por centelleo, generalmente requieren de dispositivos extra para mejorar la eficiencia de lectura. Com\'unmente se utilizan 
+t\'ecnicas 
+electr\'onicas basadas en arreglo de tubos fotomultiplicadores. 
+B\'asicamente, un tubo fotomultiplicador es un dispositivo electr\'onico, en forma de tubo, que produce un pulso  de corriente el\'ectrica 
+al ser estimulado 
+por se\~nales muy d\'ebiles, como el centelleo producido por RX,  $\gamma$ o $\beta$, etc. en un detector centellador. 
+%
+
+%
+Se coloca una pel\'icula de material fotoemisor en la ventana de vidrio de entrada, esta sunstancia\footnote{ejemplo t\'ipico es el CsSb 
+antomonio de cesio o 
+materiales alcalinos.} ejecta electrones cuando son alcanzados por fotones visibles. La superficie de fotoemisi\'on se denomina 
+fotoc\'atodo, y los electrones 
+ejectados sono fotoelectrones. 
+%
+
+%
+La eficiencia de conversi\'on de luz visible en electrones liberados se denomina eficiencia cu\'antica, y es t\'ipicamente de entre 1 a 3 
+fotoelectrones por 
+cada 10 fotones visibles que interact\'uan con el fotoc\'atodo. Claramente, la eficiencia cu\'antica dependende de la energ\'ia de la luz 
+incidente.
+%
+
+%
+Los d\'inodos son mantenidos a diferentes valores de potencial (creciente) para atraer a los electrones producidos, y los secundarios que 
+\'estos generan, de modo 
+de producir el efecto de multiplicaci\'on. Este proceso se repite usualmente unas 10 veces antes de que la corriente de electrones 
+resultante sea colectada por 
+el \'anodo. Los factores de multiplicaci\'on que se obtienen son significativos por d\'inodo, resultando en un factor global t\'ipico de 
+$10^{7}$, 
+aproximadamente. Los tubos fotomultiplicadores se sellan herm\'eticamente y se mantienen en vac\'io; y se construyen en diferentes formas y 
+tama\~no.
+%
+
+%
+Existen tambi\'en detectores de centelleo denominados ``centelladores inorg\'anicos'', ya que consisten en s\'olidos cristalinos que 
+centellean debido a 
+caracter\'isticas espec\'ificas de la estructura cristalina. Por ello, \'atomos o mol\'eculas individuales de estas substancias no 
+centellean, 
+se requiere el arreglo cristalino.
+%
+
+%
+Algunos cristales inorg\'anicos, como el NaI a temperaturas de N l\'iquido, son centella-\-
+dores en su estado puro, aunque la mayor\'ia son ``activados con 
+impurezas'', y por ello los \'atomos de impurezas\footnote{Indicado como el elemento entre par\'entesis en la notaci\'on del compuesto.} en 
+la matriz 
+cristalina, responsables del centelleo, se denominan `'centros de activaci\'on''. 
+
+A diferencia del caso de materiales inorg\'anicos, los detectores basados en materia\-
+les centelladores org\'anicos, producen el efecto de centelleo debido a 
+propiedad inherente de la mol\'ecula de la substancia. El centelleo 
+es un mecanismo de excitaci\'on molecular/desexcitaci\'on al interactuar con la radiaci\'on. Este tipo de substancias producen centelleo 
+en estado gaseoso, 
+l\'iquido o s\'olido, aunque se utilizan normalmente l\'iquidos\footnote{M\'as recientemente han cobrado importancia los centelladores 
+pl\'astico}.
+En los centelladores org\'anicos l\'iquidos se disuelve el material centellador en un solvente dentro de un contenedor t\'ipicamente de 
+vidrio 
+o pl\'astico y se agrega tambi\'en la substancia radioactiva a esta mezcla. Se coloca el contenedor entre un par de tubos 
+fotomultiplicadores y de este 
+modo se detecta la luz emitida que guarda correlaci\'on con la energ\'ia impartida por el material radioactivo.
+%
+
+%
+Las soluciones de centelladores org\'anicos l\'iquidos consisten de 4 componentes:
+
+\begin{enumerate}
+	\item Solvente org\'anico, que compone la mayor parte de la soluci\'on. Debe disolver el material centellador y tambi\'en la 
+	muestra radioactiva.
+	\item Soluto primario, que absorbe energ\'ia del solvente y emite luz. Algunos materiales centelladores t\'ipicamente utilizados 
+	son difenil-oxazol y metilestireno-benceno.
+	\item A veces las emisi\'on del soluto primario no es la mas adecuada para ser detectada por los fototubos, y entonces se utiliza 
+	un soluto secundario, cuya funci\'on es absorber la emisi\'on del soluto primario y re-emitir fotones, de mayor longitud de onda 
+	que los del soluto primario, beneficiando la detectabilidad de la luz por parte de los fototubos.
+	\item Frecuentemente se incorporan aditivos a la mezcla para mejorar ciertas propiedades como la eficiencia de tradferencia de 
+	energ\'ia. 
+\end{enumerate}
+
+El caso particular del detector de NaI(Tl), frecuentemente dise\~nado en forma de campana est\'a formado por el cristal de NaI(Tl) 
+ahuecado en un extremo para la inserci\'on 
+de la muestra.
+
+La transferencia de luz entre el cristal de NaI(Tl) y el fotomultiplicador resulta ser muy eficiente, aunque existen algunas p\'erdidas 
+debido dispersi\'on 
+dentro del detector.
+
+La eficiencia de detecci\'on $D$ de un contador de NaI(Tl) en forma de campana para un amplio rango de energ\'ias, principalmente debido 
+a 
+que la disposici\'on geom\'etrica adoptada implica un eficiencia geom\'etric $g$ muy buena. Entonces, la combinaci\'on con una alta 
+eficiencia de detecci\'on 
+y un bajo nivel de \textit{background} en el conteo, generan un detector muy eficiente, que puede utilizarse para muestras conteniendo 
+cantidades chicas 
+(Bq-kBq) de actividad de emisores $\gamma$. La eficiencia geom\'etrica $g$ para muestra de alrededor de 1ml es del 93\%, aproximadamente.
+
+ %
+\subsection{Films radiogr\'aficos}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_10}
+
+Los films, originalmente radiogr\'aficos, en t\'erminos dosim\'etricos de pobre capacidad, actualmente son reemplazados por films de tipo 
+radiocr\'omico que son detectores 
+b\'asicamente del tipo qu\'imico. El dise\~no consiste en el dep\'osito de una delgada capa de material sensible sobre una pel\'icula 
+inactiva 
+t\'ipicamente pl\'astica que proporciona sost\'en. El material sensible consiste en una diluci\'on de sales, usualmente se emplea haluros 
+de plata. 
+%
+
+%
+El principio de funcionamiento se basa en reacciones qu\'imicas catalizadas por la energ\'ia absorbida por el material. Los residuos de 
+reacci\'on, que son
+substancias con propiedades qu\'imicas diferentes al material sensible en su estado no reactivo, poseen la particular caracter\'istica de 
+presentar
+afinidad qu\'imica con otros compuestos con los que el material sensible no reactivo no tiene esa afinidad. 
+%
+
+%
+Se utiliza entonces procesos posteriores a la irradiaci\'on en los que se induce la reacci\'on entre los residuos de formaci\'on a partir 
+del material 
+sensible -debido a la absorci\'on de energ\'ia- y compuestos con afinidad que una vez unidos producen diferencias en 
+absorci\'on/transmisi\'on de luz
+visible, es decir presentan diferente opacidad all\'i donde se produce la combinaci\'on entre los productos de reacci\'on por absorci\'on 
+de radiaci\'on y
+los solutos con afinidad. Este proceso se denomina usualmente revelado radiogr\'afico.
+%
+
+%
+Una vez realizado el proceso de revelado es necesario implementar un m\'etodo de lectura. Para este fin se aprovecha la manifestaci\'on 
+evidente en 
+la diferencia de propiedades de absorci\'on/transmisi\'on de luz visible y resulta posible cuantificar estas diferencias empleando 
+t\'ecnicas de 
+densitometr\'ia \'optica. 
+%
+
+%
+La respuesta del sistema es, en definitiva, la lectura densitom\'etrica. Y es \'esta la que debe correlacionarse con la dosis absorbida, 
+lo cual se realiza
+t\'ipicamente mediante m\'etodos emp\'iricos de calibraci\'on. 
+%
+
+%
+En el caso de los films radiogr\'aficos, la capacidad dosim\'etrica es muy pobre al punto que este tipo de detectores se emplean 
+reserv\'andolos casi
+exclusivamente para determinaciones espaciales de absorci\'on de radiaci\'on; mientras que los films radiocr\'omicos -m\'as modernos- 
+permiten una 
+cuantificaci\'on confiable en t\'erminos dosim\'etricos proveyendo tambi\'en informaci\'on espacial.
+%
+
+%
+Cabe mencionar que la tejiso-equivalencia de los films radiogr\'aficos es muy mala, mientras que esta propiedad mejora para el caso de los 
+films
+radiocr\'omicos.
+
+A partir de an\'alisis cuantitativos y determinaciones emp\'iricas, resulta que ;la dependencia t\'ipica de la lactura $L$ de un film 
+(densidad \'optico) 
+presenta una dependencia polinomial (usualmente aproximada por orden 3) respecto de la dosis absorbida. De manera que, en condiciones de 
+requerir lineridad
+es necesario acotar el intervalo (rango de valores de dosis) y determinar un ajuste lineal para la zona de inter\'es.
+%
+
+%
+En cualquier caso, ambos tipos de films presentan dificultades en cuanto a la dependencia de la calidad del haz y de la direcci\'on de 
+incidencia, aunque
+debe destacarse que estos problemas son menosres para el film radiocr\'omico.
+
+ 
+ 
+\section{Adaptaci\'on de sistemas de detecci\'on al radiodiagn\'ostico m\'edico}
+% \markboth{Intr. proc. im\'agenes radiol\'ogicas \'ambito m\'edico \ \textbf{M\'ODULO III}}{ESPECIALIDAD III \ \textbf{M\'ODULO III}}
+\label{CapIII_11}

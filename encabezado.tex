@@ -1,0 +1,68 @@
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{chapterbib}
+\usepackage[none]{hyphenat}
+\usepackage{amsmath}
+
+\renewcommand{\sin}{\textrm{ sen }}
+\newcommand{\refname}{Bibliograf\'ia}
+%%%%%%%
+%% for times math: However, this package disables bold math (!)
+%% \mathbf{x} will still work, but you will not have bold math
+%% in section heads or chapter titles. If you don't use math
+%% in those environments, mathptmx might be a good choice.
+% \usepackage{mathptmx}
+\usepackage{w-bookps}
+
+% for chapter bibliography made with BibTeX
+% \usepackage{chapterbib}
+
+% for multiple indices
+% \usepackage{multind}
+
+% for answers to problems
+% \usepackage{answers}
+
+%% How many levels of section head would you like numbered?
+%% 0= no section numbers, 1= section, 2= subsection, 3= subsubsection
+%%==>>
+\setcounter{secnumdepth}{3}
+
+%% How many levels of section head would you like to appear in the
+%% Table of Contents?
+%% 0= chapter titles, 1= section titles, 2= subsection titles, 
+%% 3= subsubsection titles.
+%%==>>
+\setcounter{tocdepth}{2}
+
+%% Cropmarks? good for final page makeup
+%% \docropmarks
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% DRAFT
+%
+% Uncomment to get double spacing between lines, current date and time
+% printed at bottom of page.
+% \draft
+% (If you want to keep tables from becoming double spaced also uncomment
+% this):
+% \renewcommand{\arraystretch}{0.6}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%% Demo of section head containing sample macro:
+%% To get a macro to expand correctly in a section head, with upper and
+%% lower case math, put the definition and set the box 
+%% before \begin{document}, so that when it appears in the 
+%% table of contents it will also work:
+
+\newcommand{\VT}[1]{\ensuremath{{V_{T#1}}}}
+
+%% use a box to expand the macro before we put it into the section head:
+
+\newbox\sectsavebox
+\setbox\sectsavebox=\hbox{\boldmath\VT{xyz}}
+
+%%%%%%%%%%%%%%%%% End Demo
