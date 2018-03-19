@@ -27,7 +27,7 @@ La figura \ref{fig:10-0.1} muestra una línea del tiempo con los distintos tipos
 
 \begin{figure}
  \centering
- \includegraphics[width=.75\textwidth]{Figuras/fig10-01.png}
+ \includegraphics[width=.75\textwidth]{figures/fig10-01.png}
  \caption{Imagen tomada del libro \emph{X-Ray Computed Tomography in Biomedical Engineering}.}
  \label{fig:10-0.1}
 \end{figure}
@@ -83,7 +83,7 @@ Consideremos una geometría con un haz paralelo como en la figura \ref{fig:10-1}
 
 \begin{figure}
  \centering
- \includegraphics[width=.75\textwidth]{Figuras/cap10-1.png}
+ \includegraphics[width=.75\textwidth]{figures/cap10-1.png}
  \caption{}
  \label{fig:10-1}
 \end{figure}
@@ -127,7 +127,7 @@ Ahora, la ubicación $(x,y)$ que en el sistema de haz paralelo se ubicaba según
 
 \begin{figure}
  \centering
- \includegraphics[width=.75\textwidth]{Figuras/cap10-2.png}
+ \includegraphics[width=.75\textwidth]{figures/cap10-2.png}
  \caption{}
  \label{fig:10-2}
 \end{figure}
@@ -140,14 +140,14 @@ Los nuevos ejes $(\gamma, \beta)$ se corresponderán con los ejes $(r, \theta)$ 
 \end{eqnarray}
 
 \noindent
-donde $R$ representa la distancia desde la fuente al centro del $FOV$. Tomando las ecuaciones de la FBP y limitando $r'$ a la integración en $[-FOV/2, FOV/2]$, se tiene que 
+donde $R$ representa la distancia desde la fuente al centro del $FOV$. Tomando las ecuaciones de la FBP y limitando $r'$ a la integración en $[-FOV/2, FOV/2]$, se tiene que
 
 \begin{equation}
  f(x,y) = \frac{1}{2}\int_{0}^{2\pi}{\int_{-FOV/2}^{FOV/2}{p(r',\theta)\cdot q(x \cos{\theta} + y \sen{\theta} - r')dr'}d\theta}
 \end{equation}
 
 \noindent
-donde $1/2$ se introduce solo para contemplar la integración sobre $(0, 2\pi)$ y dando lugar a 
+donde $1/2$ se introduce solo para contemplar la integración sobre $(0, 2\pi)$ y dando lugar a
 
 \begin{equation}
  f(x,y) = \frac{1}{2} \int_{0}^{2\pi}{\int_{-\frac{fan-angle}{2}}^{\frac{fan-angle}{2}}{p(\gamma',\beta)\cdot q(x \cos{\gamma + \beta} + y \sen{\gamma + \beta} - R\sen{\gamma'})R \cos{\gamma'}d\gamma'}d\beta}
@@ -174,7 +174,7 @@ donde $U$ es la proyección de la distancia fuente-punto con el eje central del 
 
 \begin{figure}
  \centering
- \includegraphics[width=.75\textwidth]{Figuras/cap10-2.png}
+ \includegraphics[width=.75\textwidth]{figures/cap10-2.png}
  \caption{}
  \label{fig:10-3}
 \end{figure}
@@ -321,7 +321,6 @@ recientemente porque la capacidad computacional para el procesamiento no era
 compatible con el hardware disponible a{\~n}os atr{\'a}s. La discusi{\'o}n de
 los algoritmos iterativos no se encuentra dentro de los objetivos de este
 texto, por lo que solo se menciona a fines de completitud.
-
 
 
 \section{Aplicaciones en radiodiagn\'ostico metab\'olico: PET y SPECT}
