@@ -12,3 +12,8 @@ Curso de introducción al procesamiento de imágenes radiológicas en ámbito cl
 
    cap1
    cap2
+   cap3
+   cap4
+   cap5
+   cap6
+   cap7
