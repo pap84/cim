@@ -2,4 +2,4 @@
 
 Apunte de clase para el curso de Especialidad II de la carrera de Licenciatura en Física y de posgrado de la carrera de Doctorado en Física de la Facultad de Matemática, Astronomía, Física y Computación de la UNC.
 
-Fuentes para construcción de manual en PDF utilizando LaTeX.
+Fuentes para construcción de manual online usando [Sphinx](http://www.sphinx-doc.org/en/master/).
